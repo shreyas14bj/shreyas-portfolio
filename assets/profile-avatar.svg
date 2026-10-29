@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#161B26"/>
+      <stop offset="100%" stop-color="#080B10"/>
+    </radialGradient>
+    <radialGradient id="rimLight" cx="30%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#00F0FF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cyberEdge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F0FF"/>
+      <stop offset="50%" stop-color="#A855F7"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Dark Background Plate -->
+  <rect width="800" height="800" fill="url(#bgGrad)"/>
+  <circle cx="400" cy="400" r="380" fill="url(#rimLight)"/>
+
+  <!-- Tech Grid Coordinates -->
+  <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+    <line x1="100" y1="0" x2="100" y2="800"/>
+    <line x1="200" y1="0" x2="200" y2="800"/>
+    <line x1="600" y1="0" x2="600" y2="800"/>
+    <line x1="700" y1="0" x2="700" y2="800"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="600" x2="800" y2="600"/>
+  </g>
+
+  <!-- Silhouette & Aesthetic Form of Shreyas -->
+  <!-- Shoulders & Coat -->
+  <path d="M 220 750 C 240 600, 320 540, 400 540 C 480 540, 560 600, 580 750 Z" fill="#111622" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+  <!-- Collar & Shirt -->
+  <path d="M 360 540 L 400 620 L 440 540 Z" fill="#1C2436"/>
+  <path d="M 370 540 L 400 590 L 430 540 Z" fill="#0A0E17"/>
+
+  <!-- Neck -->
+  <path d="M 360 450 L 360 540 L 440 540 L 440 450 Z" fill="#D19C79" opacity="0.85"/>
+  <path d="M 360 490 C 380 520, 420 520, 440 490 Z" fill="#B37856" opacity="0.6"/>
+
+  <!-- Head & Jawline -->
+  <path d="M 330 330 C 330 450, 350 490, 400 490 C 450 490, 470 450, 470 330 C 470 230, 330 230, 330 330 Z" fill="#E2AB88"/>
+
+  <!-- Facial Shading & Contours (Subtle Artistic Crosshatch style) -->
+  <path d="M 340 340 C 350 420, 370 470, 400 480 C 370 460, 350 410, 345 350 Z" fill="#B37856" opacity="0.4"/>
+
+  <!-- Smart Modern Hair -->
+  <path d="M 320 300 C 315 220, 360 170, 420 170 C 470 170, 490 210, 485 270 C 465 240, 425 240, 395 245 C 365 250, 345 270, 320 300 Z" fill="#181A24"/>
+  <path d="M 315 290 C 335 240, 380 200, 440 210 C 465 215, 480 235, 485 260 C 455 225, 405 220, 365 235 Z" fill="#252A38" opacity="0.6"/>
+
+  <!-- Stylish Modern Glasses (Engineer / Creative look) -->
+  <rect x="335" y="320" width="55" height="38" rx="8" fill="none" stroke="#00F0FF" stroke-width="3" opacity="0.9"/>
+  <rect x="410" y="320" width="55" height="38" rx="8" fill="none" stroke="#00F0FF" stroke-width="3" opacity="0.9"/>
+  <line x1="390" y1="335" x2="410" y2="335" stroke="#00F0FF" stroke-width="3"/>
+  <line x1="335" y1="332" x2="320" y2="325" stroke="#00F0FF" stroke-width="2.5"/>
+  <line x1="465" y1="332" x2="480" y2="325" stroke="#00F0FF" stroke-width="2.5"/>
+
+  <!-- Eyes behind lenses -->
+  <circle cx="362" cy="339" r="6" fill="#181A24"/>
+  <circle cx="364" cy="337" r="2" fill="#FFFFFF"/>
+  <circle cx="437" cy="339" r="6" fill="#181A24"/>
+  <circle cx="439" cy="337" r="2" fill="#FFFFFF"/>
+
+  <!-- Eyebrows -->
+  <path d="M 340 312 Q 365 305 385 315" fill="none" stroke="#181A24" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 415 315 Q 435 305 460 312" fill="none" stroke="#181A24" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Nose & Confident Smile -->
+  <path d="M 400 340 L 396 385 L 406 388" fill="none" stroke="#B37856" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 378 415 Q 400 435 422 415" fill="none" stroke="#8A4A32" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Cybernetic Hologram Halo & Aperture Rings -->
+  <circle cx="400" cy="400" r="320" fill="none" stroke="url(#cyberEdge)" stroke-width="2" stroke-dasharray="8 12" opacity="0.7"/>
+  <circle cx="400" cy="400" r="340" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  
+  <!-- Camera Aperture Telemetry -->
+  <text x="400" y="70" text-anchor="middle" fill="#00F0FF" font-family="'JetBrains Mono', monospace" font-size="12" letter-spacing="4">SHREYAS B J // AI ENGINEER</text>
+  <text x="400" y="740" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="'JetBrains Mono', monospace" font-size="11" letter-spacing="3">f/1.2 • 50mm • TATA CONSULTANCY SERVICES</text>
+</svg>

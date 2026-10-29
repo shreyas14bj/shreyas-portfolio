@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="100%" height="100%">
+  <defs>
+    <filter id="paperTexture" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise"/>
+      <feDiffuseLighting in="noise" lighting-color="#F4EFEA" surfaceScale="1.5" result="light">
+        <feDistantLight azimuth="60" elevation="50"/>
+      </feDiffuseLighting>
+      <feBlend mode="multiply" in="SourceGraphic" in2="light"/>
+    </filter>
+  </defs>
+
+  <!-- Cold Press Paper Base -->
+  <rect width="800" height="1000" fill="#EAE5DF"/>
+
+  <!-- Graphite Sketching: The Architect's Gaze -->
+  <g stroke="#262322" fill="none" opacity="0.88">
+    <!-- Construction Guidelines (Giving authentic process feel) -->
+    <g stroke="#9C958F" stroke-width="0.75" stroke-dasharray="3 3">
+      <ellipse cx="400" cy="460" rx="210" ry="280"/>
+      <line x1="400" y1="120" x2="400" y2="820"/>
+      <line x1="180" y1="460" x2="620" y2="460"/>
+      <line x1="220" y1="380" x2="580" y2="380"/>
+      <line x1="240" y1="560" x2="560" y2="560"/>
+    </g>
+
+    <!-- Jawline & Head Contour -->
+    <path d="M 230 400 C 220 580, 290 710, 400 760 C 510 710, 580 580, 570 400 C 560 220, 240 220, 230 400 Z" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- Cross-Hatch Shading on Neck and Jaw -->
+    <g stroke="#3D3734" stroke-width="1.2">
+      <!-- Left Jaw Shadow Hatching -->
+      <line x1="250" y1="520" x2="310" y2="580"/>
+      <line x1="255" y1="535" x2="315" y2="595"/>
+      <line x1="260" y1="550" x2="320" y2="610"/>
+      <line x1="265" y1="565" x2="325" y2="625"/>
+      <line x1="270" y1="580" x2="330" y2="640"/>
+      <line x1="275" y1="595" x2="335" y2="655"/>
+      <line x1="280" y1="610" x2="340" y2="670"/>
+      <line x1="290" y1="630" x2="350" y2="690"/>
+      <!-- Opposite Cross Hatch for Depth -->
+      <line x1="310" y1="530" x2="250" y2="590"/>
+      <line x1="315" y1="545" x2="255" y2="605"/>
+      <line x1="320" y1="560" x2="260" y2="620"/>
+      <line x1="325" y1="575" x2="265" y2="635"/>
+      <line x1="330" y1="590" x2="270" y2="650"/>
+    </g>
+
+    <!-- Intricate Eyes -->
+    <!-- Left Eye -->
+    <path d="M 290 440 Q 340 415 380 440" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M 295 442 Q 340 465 375 442" stroke-width="2" stroke-linecap="round"/>
+    <ellipse cx="335" cy="440" rx="18" ry="18" fill="#1F1C1B"/>
+    <circle cx="340" cy="436" r="5" fill="#EAE5DF"/>
+
+    <!-- Right Eye -->
+    <path d="M 420 440 Q 460 415 510 440" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M 425 442 Q 460 465 505 442" stroke-width="2" stroke-linecap="round"/>
+    <ellipse cx="465" cy="440" rx="18" ry="18" fill="#1F1C1B"/>
+    <circle cx="470" cy="436" r="5" fill="#EAE5DF"/>
+
+    <!-- Eyebrows (Dynamic Stippled Strokes) -->
+    <path d="M 280 405 C 310 390, 350 395, 385 410" stroke-width="5" stroke-linecap="round"/>
+    <path d="M 415 410 C 450 395, 490 390, 520 405" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Nose Structure -->
+    <path d="M 395 425 L 390 535 L 415 540" stroke-width="2" stroke-linecap="round"/>
+    <ellipse cx="380" cy="540" rx="8" ry="5" fill="#2E2825"/>
+    <ellipse cx="420" cy="540" rx="8" ry="5" fill="#2E2825"/>
+
+    <!-- Lips (Shaded volume) -->
+    <path d="M 345 615 Q 400 600 455 615" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M 345 615 Q 400 635 455 615" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M 360 638 Q 400 655 440 638" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Dramatic Hair Flow (Loose, expressive graphite strokes) -->
+    <g stroke-width="2.2" stroke-linecap="round">
+      <path d="M 230 400 C 190 280, 240 160, 400 140 C 560 160, 610 280, 570 400"/>
+      <path d="M 240 370 C 210 240, 280 180, 390 160"/>
+      <path d="M 270 330 C 250 210, 340 170, 420 160"/>
+      <path d="M 320 280 C 330 190, 430 170, 510 200"/>
+      <path d="M 380 260 C 430 180, 520 200, 560 270"/>
+      <path d="M 430 250 C 490 200, 560 230, 575 320"/>
+    </g>
+  </g>
+
+  <!-- Artist Signature in Corner -->
+  <text x="640" y="930" font-family="'Caveat', cursive, sans-serif" font-size="28" fill="#4A4440" font-style="italic">Shreyas B J</text>
+  <text x="640" y="955" font-family="'JetBrains Mono', monospace" font-size="11" fill="#7D746D" letter-spacing="1">GRAPHITE ON 220GSM • 2025</text>
+</svg>

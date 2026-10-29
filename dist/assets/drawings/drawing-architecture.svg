@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <!-- Natural Linen Drawing Paper -->
+  <rect width="800" height="800" fill="#EAE5DE"/>
+
+  <g stroke="#262321" fill="none" opacity="0.88">
+    <!-- Isometric Cube Matrix (Mathematical Precision) -->
+    <!-- Center Cube -->
+    <g stroke-width="2.5" stroke-linejoin="round">
+      <!-- Top Face -->
+      <polygon points="400,260 520,330 400,400 280,330" fill="rgba(0,0,0,0.03)"/>
+      <!-- Left Face (Shaded) -->
+      <polygon points="280,330 400,400 400,540 280,470" fill="rgba(0,0,0,0.08)"/>
+      <!-- Right Face -->
+      <polygon points="400,400 520,330 520,470 400,540" fill="rgba(0,0,0,0.05)"/>
+    </g>
+
+    <!-- Cross-Hatch Shading on Left Face -->
+    <g stroke="#3D3734" stroke-width="1.2">
+      <line x1="290" y1="360" x2="390" y2="420"/>
+      <line x1="290" y1="380" x2="390" y2="440"/>
+      <line x1="290" y1="400" x2="390" y2="460"/>
+      <line x1="290" y1="420" x2="390" y2="480"/>
+      <line x1="290" y1="440" x2="390" y2="500"/>
+    </g>
+
+    <!-- Drafting Compass Arm (Draftsman Tool) -->
+    <g stroke-width="3" stroke-linecap="round">
+      <!-- Hinge -->
+      <circle cx="400" cy="180" r="14" fill="#262321"/>
+      <circle cx="400" cy="180" r="6" fill="#EAE5DE"/>
+      <!-- Left Compass Leg -->
+      <line x1="392" y1="190" x2="260" y2="450"/>
+      <!-- Right Compass Leg (Pencil holder) -->
+      <line x1="408" y1="190" x2="540" y2="450"/>
+      <!-- Pencil Tip at 540, 450 -->
+      <polygon points="536,440 544,440 540,460" fill="#262321"/>
+    </g>
+
+    <!-- Arc Drawn by Compass -->
+    <path d="M 260 450 A 280 280 0 0 1 540 450" stroke-width="1.8" stroke-dasharray="6 4"/>
+
+    <!-- Coordinate Grid & Angles -->
+    <g stroke="#8A827B" stroke-width="0.75" stroke-dasharray="4 2">
+      <circle cx="400" cy="400" r="300"/>
+      <circle cx="400" cy="400" r="220"/>
+      <line x1="100" y1="400" x2="700" y2="400"/>
+      <line x1="400" y1="100" x2="400" y2="700"/>
+    </g>
+  </g>
+
+  <!-- Title & Inscription -->
+  <text x="60" y="740" font-family="'JetBrains Mono', monospace" font-size="11" fill="#5E564F" letter-spacing="2">PERSPECTIVE_ISOMETRIC // HARDWARE SPEC 01</text>
+  <text x="630" y="740" font-family="'Caveat', cursive, sans-serif" font-size="24" fill="#3D3734" font-style="italic">Shreyas B J</text>
+</svg>

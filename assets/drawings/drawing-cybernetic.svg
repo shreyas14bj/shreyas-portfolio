@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <!-- Aged Draft Paper Tone -->
+  <rect width="800" height="800" fill="#E6E0D6"/>
+
+  <g stroke="#24211F" fill="none" opacity="0.9">
+    <!-- Center Cybernetic Eye Iris -->
+    <circle cx="400" cy="400" r="160" stroke-width="3"/>
+    <circle cx="400" cy="400" r="110" stroke-width="2" stroke-dasharray="6 4"/>
+    <circle cx="400" cy="400" r="60" stroke-width="3.5" fill="#24211F"/>
+    <!-- Aperture Blades in Iris -->
+    <g stroke-width="1.8">
+      <line x1="400" y1="240" x2="350" y2="350"/>
+      <line x1="560" y1="400" x2="450" y2="350"/>
+      <line x1="400" y1="560" x2="450" y2="450"/>
+      <line x1="240" y1="400" x2="350" y2="450"/>
+      <line x1="513" y1="287" x2="420" y2="330"/>
+      <line x1="513" y1="513" x2="440" y2="430"/>
+      <line x1="287" y1="513" x2="370" y2="450"/>
+      <line x1="287" y1="287" x2="360" y2="360"/>
+    </g>
+
+    <!-- Circuit Trace Filaments radiating into Neural Nodes -->
+    <g stroke-width="2" stroke-linecap="round">
+      <path d="M 560 400 H 680 L 730 450"/>
+      <circle cx="730" cy="450" r="6" fill="#24211F"/>
+
+      <path d="M 240 400 H 120 L 70 350"/>
+      <circle cx="70" cy="350" r="6" fill="#24211F"/>
+
+      <path d="M 400 240 V 120 L 450 70"/>
+      <circle cx="450" cy="70" r="6" fill="#24211F"/>
+
+      <path d="M 400 560 V 680 L 350 730"/>
+      <circle cx="350" cy="730" r="6" fill="#24211F"/>
+
+      <!-- Diagonal Neural Splines -->
+      <path d="M 513 287 L 620 180 L 680 180"/>
+      <circle cx="680" cy="180" r="5" fill="#24211F"/>
+
+      <path d="M 287 513 L 180 620 L 120 620"/>
+      <circle cx="120" cy="620" r="5" fill="#24211F"/>
+
+      <path d="M 513 513 L 600 600 L 650 570"/>
+      <circle cx="650" cy="570" r="5" fill="#24211F"/>
+
+      <path d="M 287 287 L 200 200 L 150 230"/>
+      <circle cx="150" cy="230" r="5" fill="#24211F"/>
+    </g>
+
+    <!-- Technical Annotations (Engineering Drafting style) -->
+    <g stroke="#7D746D" stroke-width="0.8" stroke-dasharray="3 3">
+      <circle cx="400" cy="400" r="280"/>
+      <line x1="50" y1="400" x2="750" y2="400"/>
+      <line x1="400" y1="50" x2="400" y2="750"/>
+    </g>
+  </g>
+
+  <!-- Typography & Inscription -->
+  <text x="60" y="740" font-family="'JetBrains Mono', monospace" font-size="11" fill="#544C46" letter-spacing="2">SYNAPSE_ARCH_08 // COGNITIVE RECEPTOR</text>
+  <text x="630" y="740" font-family="'Caveat', cursive, sans-serif" font-size="24" fill="#3D3734" font-style="italic">Shreyas B J</text>
+</svg>

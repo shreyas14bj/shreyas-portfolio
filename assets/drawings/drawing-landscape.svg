@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" width="100%" height="100%">
+  <!-- Cold Press Paper Tone -->
+  <rect width="1000" height="700" fill="#E8E3DC"/>
+
+  <!-- Landscape Sketch: Western Ghats / Chikkamagaluru -->
+  <g stroke="#2B2725" fill="none" opacity="0.85">
+    
+    <!-- Distant Ridge Lines (Delicate & Atmospheric) -->
+    <path d="M 0 280 C 180 240, 320 310, 500 250 C 680 190, 840 260, 1000 210" stroke-width="1.2" stroke-dasharray="2 1"/>
+    <path d="M 0 330 C 140 300, 290 350, 440 290 C 620 220, 780 320, 1000 270" stroke-width="1.8"/>
+    
+    <!-- Midground Peaks (Mullayanagiri & Baba Budangiri ridgeline) -->
+    <path d="M 0 420 C 150 360, 310 440, 480 340 C 640 260, 780 390, 1000 320" stroke-width="2.5"/>
+
+    <!-- Ridge Shading (Cross-Hatch on slope shadows) -->
+    <g stroke="#3D3734" stroke-width="1">
+      <line x1="420" y1="360" x2="480" y2="420"/>
+      <line x1="430" y1="365" x2="490" y2="425"/>
+      <line x1="440" y1="370" x2="500" y2="430"/>
+      <line x1="450" y1="375" x2="510" y2="435"/>
+      <line x1="460" y1="380" x2="520" y2="440"/>
+      <line x1="470" y1="385" x2="530" y2="445"/>
+    </g>
+
+    <!-- Foreground Mountain & Slope -->
+    <path d="M 0 540 C 220 480, 410 580, 680 430 C 820 380, 930 460, 1000 410" stroke-width="3.5"/>
+
+    <!-- Coffee Plantation & Pine Silhouettes -->
+    <!-- Pine cluster 1 -->
+    <g stroke-width="2" stroke-linecap="round">
+      <!-- Tree trunks -->
+      <line x1="120" y1="560" x2="120" y2="460"/>
+      <path d="M 120 450 L 105 480 L 135 480 Z"/>
+      <path d="M 120 470 L 100 505 L 140 505 Z"/>
+      <path d="M 120 495 L 90 535 L 150 535 Z"/>
+
+      <line x1="160" y1="570" x2="160" y2="480"/>
+      <path d="M 160 470 L 145 500 L 175 500 Z"/>
+      <path d="M 160 490 L 140 525 L 180 525 Z"/>
+
+      <!-- Giant Shaded Canopy Tree -->
+      <line x1="780" y1="620" x2="780" y2="450" stroke-width="4"/>
+      <path d="M 780 490 C 720 460, 680 400, 750 350 C 810 320, 890 350, 910 400 C 930 460, 860 490, 780 490 Z" stroke-width="2.5"/>
+      <!-- Canopy Shading Hatch -->
+      <g stroke="#3D3734" stroke-width="1.2">
+        <line x1="710" y1="410" x2="770" y2="450"/>
+        <line x1="720" y1="400" x2="780" y2="440"/>
+        <line x1="730" y1="390" x2="790" y2="430"/>
+        <line x1="740" y1="380" x2="800" y2="420"/>
+        <line x1="750" y1="370" x2="810" y2="410"/>
+        <line x1="760" y1="360" x2="820" y2="400"/>
+      </g>
+    </g>
+
+    <!-- Winding Trek Trail through Valley -->
+    <path d="M 180 680 Q 280 620 340 580 Q 420 540 460 510 Q 520 480 560 450" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+    <!-- Mist & Atmosphere Bands (Soft graphite washes) -->
+    <path d="M 200 420 C 400 390, 600 440, 800 410" stroke="#8E857C" stroke-width="1" stroke-dasharray="8 6"/>
+    <path d="M 150 450 C 350 430, 550 470, 750 440" stroke="#8E857C" stroke-width="1" stroke-dasharray="10 8"/>
+  </g>
+
+  <!-- Title & Signature -->
+  <text x="50" y="660" font-family="'JetBrains Mono', monospace" font-size="12" fill="#5E5650" letter-spacing="2">CHIKKAMAGALURU HIGHLANDS // STUDY 04</text>
+  <text x="820" y="660" font-family="'Caveat', cursive, sans-serif" font-size="24" fill="#3D3734" font-style="italic">Shreyas B J</text>
+</svg>
