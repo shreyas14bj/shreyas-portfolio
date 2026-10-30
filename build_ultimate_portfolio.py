@@ -596,7 +596,7 @@ html_template = '''<!DOCTYPE html>
           <div class="relative group w-full max-w-sm">
             <div id="profileFrame" class="interactive-card p-3 w-fit mx-auto shadow-xl">
               <div class="relative overflow-hidden rounded-xl border flex items-center justify-center" style="background-color: var(--card-bg-alt); border-color: var(--card-border);">
-                <img id="profilePhotoImg" src="./assets/profile-avatar.svg" alt="Shreyas B J - Portrait" class="max-h-[400px] w-auto h-auto max-w-full object-contain mx-auto block group-hover:scale-[1.01] transition-transform duration-500">
+                <img id="profilePhotoImg" src="./assets/shreyas-photo.png" onerror="this.onerror=null;this.src='./assets/shreyas-photo.png';" alt="Shreyas B J - Portrait" class="max-h-[400px] w-auto h-auto max-w-full object-contain mx-auto block group-hover:scale-[1.01] transition-transform duration-500">
                 <div class="absolute bottom-2.5 right-2.5 px-2.5 py-0.5 rounded backdrop-blur-md border text-[10px] font-mono text-cyan-500" style="background-color: var(--bg-header); border-color: var(--card-border);">
                   <span id="aspectRatioTag">PORTRAIT</span>
                 </div>
@@ -1321,21 +1321,21 @@ html_template = '''<!DOCTYPE html>
 
       <!-- Bottom Toolbar -->
       <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t font-mono text-xs" style="border-color: var(--card-border);">
-        <div class="flex items-center space-x-2">
-          <button onclick="exportLivePortfolioHtml()" class="px-4 py-2.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 font-bold flex items-center space-x-1.5 transition-all shadow-sm" title="Download updated index.html with all your uploaded images baked in">
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="exportDataBackupJson()" class="px-3.5 py-2 rounded-xl border border-blue-500/40 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 font-bold flex items-center space-x-1.5 transition-all text-xs" title="Download all drawings, projects and data as a JSON backup">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            <span>EXPORT BACKUP (.JSON)</span>
+          </button>
+          <button onclick="triggerImportBackupJson()" class="px-3.5 py-2 rounded-xl border border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 font-bold flex items-center space-x-1.5 transition-all text-xs" title="Restore your drawings and works from a JSON backup file">
+            <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+            <span>IMPORT BACKUP (.JSON)</span>
+          </button>
+          <button onclick="exportLivePortfolioHtml()" class="px-3.5 py-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 font-bold flex items-center space-x-1.5 transition-all text-xs" title="Download updated index.html with all your uploaded images baked in">
             <i data-lucide="download-cloud" class="w-3.5 h-3.5"></i>
             <span>EXPORT PERMANENT HTML</span>
           </button>
-          <button onclick="lockEditing(); closeEditOptionsHubModal();" class="px-4 py-2.5 rounded-xl border border-red-500/40 bg-red-500/10 hover:bg-red-500/20 text-red-400 font-bold flex items-center space-x-1.5 transition-all">
-            <i data-lucide="lock" class="w-3.5 h-3.5"></i>
-            <span>LOCK EDITING SESSION</span>
-          </button>
         </div>
-        <button onclick="closeEditOptionsHubModal()" class="px-5 py-2.5 rounded-xl border hover:border-gray-400 text-gray-300 font-bold" style="border-color: var(--input-border);">
-          CLOSE STUDIO
-        </button>
       </div>
-    </div>
   </div>
 
   <div id="editHeroModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
@@ -2194,50 +2194,50 @@ html_template = '''<!DOCTYPE html>
     const DEFAULT_CERTS = [
       {
         id: 1,
-        title: 'Certified Associate — Machine Learning',
+        title: 'Databricks Certified Machine Learning Associate',
         issuer: 'DATABRICKS',
         credId: 'CERT-DB-ML',
-        desc: 'Distributed Apache Spark compute, feature store management, MLflow model governance, and scalable production deployment.',
+        desc: 'Distributed Apache Spark compute, feature store management, MLflow model governance, and scalable production deployment on Databricks Lakehouse platform. (Oct 2026 – Oct 2028)',
         image: null
       },
       {
         id: 2,
         title: 'Claude Certified Prompt Engineer',
-        issuer: 'ANTHROPIC',
+        issuer: 'ANTHROPIC CLAUDE',
         credId: 'CERT-ANTH-01',
-        desc: 'Multi-turn agentic workflows, chain-of-thought steering, structured XML parsing, and tool-augmented pipelines.',
+        desc: 'Multi-turn agentic workflows, chain-of-thought steering, structured XML parsing, and LLM-based application development. (Aug 2026 – Aug 2027)',
         image: null
       },
       {
         id: 3,
-        title: 'Gemini AI Certified Developer',
+        title: 'Build With Gemini Certified Developer',
         issuer: 'GOOGLE CLOUD',
         credId: 'CERT-GCP-GEM',
-        desc: 'Multimodal vision models, Vertex AI embeddings, vector search index construction, and low-latency inference.',
+        desc: 'Hands-on experience developing AI-powered solutions using Google Gemini and generative AI capabilities, multimodal vision models, and Vertex AI. (Oct 2026)',
         image: null
       },
       {
         id: 4,
-        title: 'Deep Learning & Microprocessors',
-        issuer: 'IIT MADRAS / NPTEL',
-        credId: 'CERT-IITM-NPT',
-        desc: 'Convolutional architectures, backpropagation loss landscapes, and embedded microprocessor signal processing.',
+        title: 'Introduction to Generative AI',
+        issuer: 'NXT WAVE',
+        credId: 'CERT-NXT-GENAI',
+        desc: 'Fundamentals of Generative AI, building neural network models, deep learning foundations, and AI-generated content architectures. (Sep 2024)',
         image: null
       },
       {
         id: 5,
-        title: 'Python Full Stack Specialist',
-        issuer: 'NXT WAVE',
-        credId: 'CERT-NXT-PY',
-        desc: 'Python full stack architecture, relational database SQL schemas, REST microservices, and algorithmic design.',
+        title: 'Programming in Java',
+        issuer: 'NPTEL',
+        credId: 'CERT-NPTEL-JAVA',
+        desc: 'Completed structured course covering core Java programming concepts, object-oriented principles, and algorithmic problem-solving. (Oct 2024)',
         image: null
       },
       {
         id: 6,
-        title: 'Embedded Systems & IoT',
+        title: 'Python Programming Specialist',
         issuer: 'TECHNICAL HUB',
-        credId: 'CERT-TH-EMB',
-        desc: 'STM32 & ESP32 microcontroller firmware, hardware timer configurations, and hardware protocols (I2C, SPI, UART).',
+        credId: 'CERT-TH-PYTHON',
+        desc: 'Advanced Python problem-solving, debugging complex logic, data structures, and algorithmic optimizations. (Dec 2023 – Feb 2024)',
         image: null
       }
     ];
@@ -3638,7 +3638,7 @@ html_template = '''<!DOCTYPE html>
           <!-- Compact Header: Author, Date & Delete Button (When Authorized) -->
           <div class="px-3 py-2 border-b flex items-center justify-between text-[11px]" style="border-color: var(--card-border); background-color: var(--card-bg);">
             <div class="flex items-center space-x-2">
-              <img src="${profilePhotoImg ? profilePhotoImg.src : './assets/profile-avatar.svg'}" class="w-5 h-5 rounded-full object-cover border border-amber-400">
+              <img src="${profilePhotoImg ? profilePhotoImg.src : './assets/shreyas-photo.png'}" class="w-5 h-5 rounded-full object-cover border border-amber-400">
               <span class="font-display font-bold text-xs" style="color: var(--text-main);">Shreyas B J</span>
             </div>
             <div class="flex items-center space-x-2">
@@ -4480,11 +4480,89 @@ html_template = '''<!DOCTYPE html>
       }
     }
 
-        function exportLivePortfolioHtml() {
+        
+    // =========================================================================
+    // UNIVERSAL DATA BACKUP & RESTORATION ENGINE (JSON EXPORT / IMPORT)
+    // =========================================================================
+    function exportDataBackupJson() {
+      showToast('Generating complete JSON data backup...');
+      try {
+        const backupData = {
+          version: '2.0',
+          exportedAt: new Date().toISOString(),
+          drawings: getDrawings(),
+          projects: getProjects(),
+          certifications: getCertifications(),
+          experiences: getExperiences(),
+          profilePhoto: localStorage.getItem('shreyas_uploaded_profile_photo') || localStorage.getItem('shreyas_custom_avatar_img') || null
+        };
+
+        const jsonStr = JSON.stringify(backupData, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `shreyas-portfolio-backup-${new Date().toISOString().slice(0, 10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('Backup exported successfully! You can import this anytime on any device.');
+      } catch (err) {
+        showToast('Backup export error: ' + err.message);
+      }
+    }
+
+    function triggerImportBackupJson() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.json,application/json';
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = async (event) => {
+          try {
+            const data = JSON.parse(event.target.result);
+            if (data.drawings && Array.isArray(data.drawings)) {
+              saveDrawings(data.drawings);
+            }
+            if (data.projects && Array.isArray(data.projects)) {
+              saveProjects(data.projects);
+            }
+            if (data.certifications && Array.isArray(data.certifications)) {
+              saveCertifications(data.certifications);
+            }
+            if (data.experiences && Array.isArray(data.experiences)) {
+              saveExperiences(data.experiences);
+            }
+            if (data.profilePhoto) {
+              await SafeStorage.set('shreyas_uploaded_profile_photo', data.profilePhoto);
+              await SafeStorage.set('shreyas_custom_avatar_img', data.profilePhoto);
+              const pImg = document.getElementById('profilePhotoImg');
+              if (pImg) pImg.src = data.profilePhoto;
+            }
+            // Re-render all views
+            renderDrawings();
+            renderProjects();
+            renderCertifications();
+            renderJourney();
+            showToast('All past works, drawings, and projects successfully restored and saved!');
+            closeEditOptionsHubModal();
+          } catch (err) {
+            alert('Failed to import backup file: Invalid JSON structure.');
+          }
+        };
+        reader.readAsText(file);
+      };
+      input.click();
+    }
+
+    function exportLivePortfolioHtml() {
       showToast('Preparing complete portfolio export...');
       setTimeout(() => {
         // Deep clone current HTML
-        let fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+        let fullHtml = '<!DOCTYPE html>' + String.fromCharCode(10) + document.documentElement.outerHTML;
 
         // Create Blob and trigger download
         const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
@@ -4766,29 +4844,38 @@ html_template = '''<!DOCTYPE html>
       {
         id: "exp_tcs",
         company: "Tata Consultancy Services (TCS)",
-        role: "AI / ML Engineer &bull; Full-Time",
-        period: "2024 &bull; PRESENT",
+        role: "Assistant System Engineer Trainee &bull; AI / ML",
+        period: "CURRENTLY WORKING",
         location: "BANGALORE, INDIA",
-        summary: "Developing enterprise machine learning workflows, multi-agent LLM systems with LangChain, and automated quality assurance intelligence pipelines across high-scale industrial client platforms.",
-        tags: ["Python", "LangChain", "PyTorch", "ChromaDB", "FastAPI"]
+        summary: "Working as an Assistant System Engineer Trainee in the Artificial Intelligence and Machine Learning domain. Deep hands-on exposure across Python, AI/ML concepts, enterprise data analysis, model development, machine learning workflows, SQL, Linux, and UI/UX engineering.",
+        tags: ["Python", "AI/ML Workflows", "Model Development", "Data Analysis", "SQL", "Linux", "UI/UX"]
       },
       {
-        id: "exp_kaynes",
-        company: "Kaynes Technology India Limited",
-        role: "Graduate Engineer Trainee &bull; Failure Analysis &amp; SMT Engineering",
-        period: "08/2025 &bull; PRESENT",
-        location: "MYSORE, INDIA",
-        summary: "Specializing in Failure Analysis of electronic components and complex printed circuit board assemblies. Diagnosing root-cause defects in SMT manufacturing, thermal profiling, and implementing computer vision inspection prototypes to maximize production yield.",
-        tags: ["Failure Analysis", "SMT & PCB Inspection", "Computer Vision", "Oscilloscopes", "Root-Cause Analysis"]
+        id: "exp_foxconn",
+        company: "Foxconn Hon Hai Technology",
+        role: "AAE Trainee &bull; Industrial Hardware &amp; Reliability",
+        period: "06/2025 &bull; 05/2026",
+        location: "INDIA",
+        summary: "Troubleshooting and resolving complex industrial machine anomalies to guarantee smooth continuous production line operations and minimize downtime. Authored comprehensive Failure Analysis documentations and conducted statistical Boxplot variance analysis.",
+        tags: ["Failure Analysis", "Boxplot Analysis", "Machine Troubleshooting", "Downtime Minimization", "Hardware Reliability"]
       },
       {
-        id: "exp_verzeo",
-        company: "Verzeo",
-        role: "Machine Learning Intern &bull; Data Science &amp; Predictive Analytics",
-        period: "03/2024 &bull; 05/2024",
-        location: "BANGALORE, INDIA",
-        summary: "Engineered predictive machine learning pipelines using Scikit-Learn, Pandas, and NumPy. Designed end-to-end data cleaning, exploratory data analysis dashboards, and model evaluation metrics for enterprise datasets.",
-        tags: ["Scikit-Learn", "Pandas & NumPy", "Streamlit", "Exploratory Data Analysis"]
+        id: "exp_vtu",
+        company: "Skill Enhancement Course by VTU",
+        role: "React Development &amp; AI Integration",
+        period: "12/2024 &bull; 05/2025",
+        location: "KARNATAKA, INDIA",
+        summary: "Mastered building intelligent, dynamic, and responsive web applications by integrating AI-powered features into modern React development workflows, component lifecycles, and state management.",
+        tags: ["React.js", "AI Integration", "Dynamic UI", "Responsive Design", "Modern Web"]
+      },
+      {
+        id: "exp_skillcraft",
+        company: "Skill Craft Technology",
+        role: "Web Developer Intern &bull; Frontend Engineering",
+        period: "10/2024 (1 MONTH)",
+        location: "REMOTE, INDIA",
+        summary: "Completed responsive web applications including dynamic Landing Pages, precision Stopwatches, Tic Tac Toe game logic, and interactive To-Do lists using semantic HTML5, modern CSS3 styling, and JavaScript DOM manipulation.",
+        tags: ["HTML5 / CSS3", "JavaScript ES6", "DOM Manipulation", "UI Engineering"]
       }
     ];
 
