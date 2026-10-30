@@ -526,10 +526,18 @@
     <!-- ======================================================================= -->
     <section id="hero" class="min-h-[75vh] flex flex-col justify-center items-center text-center max-w-5xl mx-auto space-y-6 py-10">
       
-      <!-- Role Badge -->
-      <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border text-xs font-mono shadow-sm" style="background-color: var(--card-bg-alt); border-color: rgba(212, 175, 55, 0.35); color: var(--gold-accent);">
-        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse shadow-[0_0_6px_#F5D061]"></span>
-        <span id="heroRoleBadge" class="tracking-wider">AI / ML ENGINEER &bull; TATA CONSULTANCY SERVICES (TCS)</span>
+      <!-- Role Badge & Edit Hero Container -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border text-xs font-mono shadow-sm" style="background-color: var(--card-bg-alt); border-color: rgba(212, 175, 55, 0.35); color: var(--gold-accent);">
+          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse shadow-[0_0_6px_#F5D061]"></span>
+          <span id="heroRoleBadge" class="tracking-wider">AI / ML ENGINEER &bull; TATA CONSULTANCY SERVICES (TCS)</span>
+        </div>
+        <div id="editHeroBtnContainer" class="hidden">
+          <button onclick="openEditHeroModal()" class="px-3.5 py-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 font-mono text-xs flex items-center space-x-1.5 shadow-sm transition-all" title="Edit Hero Section">
+            <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+            <span class="font-bold">EDIT HERO</span>
+          </button>
+        </div>
       </div>
 
       <!-- Main Title -->
@@ -619,9 +627,17 @@
     <!-- ======================================================================= -->
     <section id="about" class="py-8">
       
-      <div class="mb-8 space-y-1">
-        <span class="text-xs font-mono text-cyan-500 font-bold uppercase tracking-wider">ABOUT &bull; BIOGRAPHY</span>
-        <h2 id="aboutSectionTitle" class="text-2xl sm:text-4xl font-display font-bold tracking-tight" style="color: var(--text-main);">The Architect</h2>
+      <div class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <span class="text-xs font-mono text-cyan-500 font-bold uppercase tracking-wider">ABOUT &bull; BIOGRAPHY</span>
+          <h2 id="aboutSectionTitle" class="text-2xl sm:text-4xl font-display font-bold tracking-tight" style="color: var(--text-main);">The Architect</h2>
+        </div>
+        <div id="editAboutBtnContainer" class="hidden self-start sm:self-auto">
+          <button onclick="openEditAboutModal()" class="px-3.5 py-2 rounded-xl border border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 font-mono text-xs flex items-center space-x-1.5 transition-all shadow-sm" title="Edit About Section">
+            <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+            <span class="font-bold">EDIT ABOUT</span>
+          </button>
+        </div>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -685,10 +701,18 @@
     <!-- ======================================================================= -->
     <section id="professional" class="py-8">
       
-      <div class="mb-8 space-y-1">
-        <span class="text-xs font-mono text-cyan-500 font-bold uppercase tracking-wider">CAREER CHRONICLES &bull; INDUSTRY</span>
-        <h2 class="text-2xl sm:text-4xl font-display font-bold tracking-tight" style="color: var(--text-main);">Professional Journey</h2>
-        <p class="text-xs font-mono" style="color: var(--text-sub);">Industrial execution in enterprise AI, manufacturing failure analysis, and data engineering.</p>
+      <div class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <span class="text-xs font-mono text-cyan-500 font-bold uppercase tracking-wider">CAREER CHRONICLES &bull; INDUSTRY</span>
+          <h2 class="text-2xl sm:text-4xl font-display font-bold tracking-tight" style="color: var(--text-main);">Professional Journey</h2>
+          <p class="text-xs font-mono" style="color: var(--text-sub);">Industrial execution in enterprise AI, manufacturing failure analysis, and data engineering.</p>
+        </div>
+        <div id="addExperienceBtnContainer" class="hidden self-start sm:self-auto">
+          <button onclick="openAddExperienceModal()" class="px-3.5 py-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 font-mono text-xs flex items-center space-x-1.5 transition-all shadow-sm" title="Add Career Role">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i>
+            <span class="font-bold">+ ADD CAREER ROLE</span>
+          </button>
+        </div>
       </div>
 
       <div class="space-y-4">
@@ -702,10 +726,18 @@
     <!-- ======================================================================= -->
     <section id="education" class="py-8">
       
-      <div class="mb-8 space-y-1">
-        <span class="text-xs font-mono text-purple-500 font-bold uppercase tracking-wider">ACADEMIC FOUNDATION &bull; HIGHER EDUCATION</span>
-        <h2 class="text-2xl sm:text-4xl font-display font-bold tracking-tight" style="color: var(--text-main);">Educational Journey</h2>
-        <p class="text-xs font-mono" style="color: var(--text-sub);">Academic rigor, degree credentials, and engineering foundational milestones.</p>
+      <div class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <span class="text-xs font-mono text-purple-500 font-bold uppercase tracking-wider">ACADEMIC FOUNDATION &bull; HIGHER EDUCATION</span>
+          <h2 class="text-2xl sm:text-4xl font-display font-bold tracking-tight" style="color: var(--text-main);">Educational Journey</h2>
+          <p class="text-xs font-mono" style="color: var(--text-sub);">Academic rigor, degree credentials, and engineering foundational milestones.</p>
+        </div>
+        <div id="addEducationBtnContainer" class="hidden self-start sm:self-auto">
+          <button onclick="openAddEducationModal()" class="px-3.5 py-2 rounded-xl border border-purple-500/40 bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 font-mono text-xs flex items-center space-x-1.5 transition-all shadow-sm" title="Add Education">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i>
+            <span class="font-bold">+ ADD EDUCATION</span>
+          </button>
+        </div>
       </div>
 
       <div class="space-y-4">
@@ -1874,10 +1906,26 @@
 
     function requireAuth(actionFn, promptMsg) {
       if (isAuthorized()) {
-        actionFn();
+        if (typeof actionFn === 'function') actionFn();
       } else {
-        pendingAuthAction = actionFn;
-        openAuthModal(promptMsg || 'Enter password to access edit options for all sections');
+        let pass = null;
+        try {
+          pass = window.prompt(promptMsg || "Security Authorization Required:\nEnter password to unlock portfolio editing:");
+        } catch(e) {
+          pendingAuthAction = actionFn;
+          openAuthModal(promptMsg);
+          return;
+        }
+        if (pass === null) return;
+        if (pass.trim() === EDIT_PASSWORD) {
+          isEditAuthorized = true;
+          try { sessionStorage.setItem('shreyas_portfolio_authorized', 'true'); } catch(e) {}
+          updateAuthUI();
+          showToast('Password verified! Editing unlocked.');
+          if (typeof actionFn === 'function') actionFn();
+        } else {
+          alert('Incorrect password. Access denied.');
+        }
       }
     }
 
@@ -4514,10 +4562,31 @@
     function handleTopEditOptionsClick() {
       if (isAuthorized()) {
         lockEditing();
+        return;
+      }
+
+      let enteredPassword = null;
+      try {
+        enteredPassword = window.prompt("Security Authorization Required:\nEnter password to unlock portfolio editing:");
+      } catch (err) {
+        openAuthModal("Enter password to unlock portfolio editing");
+        return;
+      }
+
+      if (enteredPassword === null) {
+        // User clicked cancel
+        return;
+      }
+
+      if (enteredPassword.trim() === EDIT_PASSWORD) {
+        isEditAuthorized = true;
+        try {
+          sessionStorage.setItem('shreyas_portfolio_authorized', 'true');
+        } catch(e) {}
+        updateAuthUI();
+        showToast('Password verified! All edit options are now active across all sections.');
       } else {
-        requireAuth(() => {
-          showToast('Portfolio editing unlocked! Edit options are now active across all sections.');
-        }, 'Enter password to unlock portfolio editing');
+        alert('Incorrect password. Access denied.');
       }
     }
 
@@ -5383,6 +5452,26 @@
       safeCreateIcons();
     }
     
+    // Global bindings for seamless cross-browser event handling
+    window.handleTopEditOptionsClick = handleTopEditOptionsClick;
+    window.isAuthorized = isAuthorized;
+    window.lockEditing = lockEditing;
+    window.requireAuth = requireAuth;
+    window.updateAuthUI = updateAuthUI;
+    window.openEditHeroModal = openEditHeroModal;
+    window.openEditAboutModal = openEditAboutModal;
+    window.openAddExperienceModal = openAddExperienceModal;
+    window.openAddEducationModal = openAddEducationModal;
+    window.openAddCertModal = openAddCertModal;
+    window.openAddProjectModal = openAddProjectModal;
+    window.openNewPostModal = openNewPostModal;
+
+    // Attach explicit click listeners for top edit buttons
+    const topBtnDesktop = document.getElementById('globalEditToggleBtnDesktop');
+    const topBtnMobile = document.getElementById('globalEditToggleBtnMobile');
+    if (topBtnDesktop) topBtnDesktop.onclick = handleTopEditOptionsClick;
+    if (topBtnMobile) topBtnMobile.onclick = handleTopEditOptionsClick;
+
     // Initial render of all sections
     renderHero();
     renderAbout();
