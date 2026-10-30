@@ -1321,10 +1321,16 @@ html_template = '''<!DOCTYPE html>
 
       <!-- Bottom Toolbar -->
       <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t font-mono text-xs" style="border-color: var(--card-border);">
-        <button onclick="lockEditing(); closeEditOptionsHubModal();" class="px-4 py-2.5 rounded-xl border border-red-500/40 bg-red-500/10 hover:bg-red-500/20 text-red-400 font-bold flex items-center space-x-1.5 transition-all">
-          <i data-lucide="lock" class="w-3.5 h-3.5"></i>
-          <span>LOCK EDITING SESSION</span>
-        </button>
+        <div class="flex items-center space-x-2">
+          <button onclick="exportLivePortfolioHtml()" class="px-4 py-2.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 font-bold flex items-center space-x-1.5 transition-all shadow-sm" title="Download updated index.html with all your uploaded images baked in">
+            <i data-lucide="download-cloud" class="w-3.5 h-3.5"></i>
+            <span>EXPORT PERMANENT HTML</span>
+          </button>
+          <button onclick="lockEditing(); closeEditOptionsHubModal();" class="px-4 py-2.5 rounded-xl border border-red-500/40 bg-red-500/10 hover:bg-red-500/20 text-red-400 font-bold flex items-center space-x-1.5 transition-all">
+            <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+            <span>LOCK EDITING SESSION</span>
+          </button>
+        </div>
         <button onclick="closeEditOptionsHubModal()" class="px-5 py-2.5 rounded-xl border hover:border-gray-400 text-gray-300 font-bold" style="border-color: var(--input-border);">
           CLOSE STUDIO
         </button>
@@ -1840,6 +1846,122 @@ html_template = '''<!DOCTYPE html>
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
+
+    // =========================================================================
+    // UNIVERSAL PERSISTENCE & CANVAS MEDIA OPTIMIZER ENGINE
+    // Prevents images from disappearing on refresh across Netlify deployments
+    // =========================================================================
+    const UNIFIED_DB_NAME = 'ShreyasArtStudioDB_v2';
+    const UNIFIED_DB_VERSION = 2;
+
+    function openUnifiedDB() {
+      return new Promise((resolve) => {
+        if (!window.indexedDB) { resolve(null); return; }
+        try {
+          const req = indexedDB.open(UNIFIED_DB_NAME, UNIFIED_DB_VERSION);
+          req.onupgradeneeded = (e) => {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains('media_store')) {
+              db.createObjectStore('media_store', { keyPath: 'key' });
+            }
+            if (!db.objectStoreNames.contains('sketchbook')) {
+              db.createObjectStore('sketchbook', { keyPath: 'id' });
+            }
+          };
+          req.onsuccess = (e) => resolve(e.target.result);
+          req.onerror = () => resolve(null);
+        } catch (err) {
+          resolve(null);
+        }
+      });
+    }
+
+    // Compress ANY uploaded photo on client canvas: ~5MB camera photos become ~60KB-120KB
+    function optimizeImageFile(file, maxDimension = 1280, quality = 0.82) {
+      return new Promise((resolve) => {
+        if (!file) { resolve(null); return; }
+        if (file.type === 'image/svg+xml') {
+          const reader = new FileReader();
+          reader.onload = (e) => resolve(e.target.result);
+          reader.onerror = () => resolve(null);
+          reader.readAsDataURL(file);
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            try {
+              let width = img.naturalWidth || img.width;
+              let height = img.naturalHeight || img.height;
+
+              if (width > maxDimension || height > maxDimension) {
+                if (width > height) {
+                  height = Math.round((height * maxDimension) / width);
+                  width = maxDimension;
+                } else {
+                  width = Math.round((width * maxDimension) / height);
+                  height = maxDimension;
+                }
+              }
+
+              const canvas = document.createElement('canvas');
+              canvas.width = width;
+              canvas.height = height;
+              const ctx = canvas.getContext('2d');
+              ctx.imageSmoothingEnabled = true;
+              ctx.imageSmoothingQuality = 'high';
+              ctx.drawImage(img, 0, 0, width, height);
+
+              const compressedUrl = canvas.toDataURL('image/jpeg', quality);
+              resolve(compressedUrl);
+            } catch (err) {
+              resolve(e.target.result);
+            }
+          };
+          img.onerror = () => resolve(e.target.result);
+          img.src = e.target.result;
+        };
+        reader.onerror = () => resolve(null);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    const SafeStorage = {
+      set: async function(key, value) {
+        try {
+          localStorage.setItem(key, typeof value === 'string' ? value : JSON.stringify(value));
+        } catch (e) {}
+        try {
+          const db = await openUnifiedDB();
+          if (db) {
+            const tx = db.transaction('media_store', 'readwrite');
+            const store = tx.objectStore('media_store');
+            store.put({ key: key, value: value, updatedAt: Date.now() });
+          }
+        } catch (err) {}
+      },
+      get: async function(key) {
+        try {
+          const val = localStorage.getItem(key);
+          if (val) return val;
+        } catch (e) {}
+        try {
+          const db = await openUnifiedDB();
+          if (db) {
+            return new Promise((resolve) => {
+              const tx = db.transaction('media_store', 'readonly');
+              const store = tx.objectStore('media_store');
+              const req = store.get(key);
+              req.onsuccess = () => resolve(req.result ? req.result.value : null);
+              req.onerror = () => resolve(null);
+            });
+          }
+        } catch (err) {}
+        return null;
+      }
+    };
     window.addEventListener('beforeunload', () => {
       window.scrollTo(0, 0);
     });
@@ -2051,25 +2173,20 @@ html_template = '''<!DOCTYPE html>
       };
     }
 
-    const savedProfile = localStorage.getItem('shreyas_uploaded_profile_photo');
-    if (savedProfile && profilePhotoImg) profilePhotoImg.src = savedProfile;
+    // Synchronous + Asynchronous Profile Photo initialization
+    const syncProfile = localStorage.getItem('shreyas_uploaded_profile_photo') || 
+                        localStorage.getItem('shreyas_custom_avatar_img');
+    if (syncProfile && profilePhotoImg) profilePhotoImg.src = syncProfile;
 
-    if (profilePhotoInput) {
-      profilePhotoInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          const dataUrl = event.target.result;
-          profilePhotoImg.src = dataUrl;
-          try {
-            localStorage.setItem('shreyas_uploaded_profile_photo', dataUrl);
-          } catch (err) {}
-          showToast('Profile photo updated successfully!');
-        };
-        reader.readAsDataURL(file);
-      });
-    }
+    SafeStorage.get('profile_photo').then(asyncProfile => {
+      if (asyncProfile && profilePhotoImg) {
+        profilePhotoImg.src = asyncProfile;
+        try {
+          localStorage.setItem('shreyas_uploaded_profile_photo', asyncProfile);
+          localStorage.setItem('shreyas_custom_avatar_img', asyncProfile);
+        } catch(e) {}
+      }
+    });
 
     // -------------------------------------------------------------------------
     // 4. CERTIFICATIONS SYSTEM (DEFAULT 6 + DYNAMIC ADDITIONS + VERIFIED BADGES)
@@ -2404,20 +2521,28 @@ html_template = '''<!DOCTYPE html>
     }
     renderCertificates();
 
-    function handleCertUpload(e, certId) {
-      const file = e.target.files[0];
+    async function handleCertUpload(e, certId) {
+      const file = e.target.files && e.target.files[0];
       if (!file) return;
 
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const dataUrl = event.target.result;
-        try {
-          localStorage.setItem('shreyas_cert_img_' + certId, dataUrl);
-        } catch (err) {}
-        renderCertificates();
-        showToast('Certificate image saved successfully!');
-      };
-      reader.readAsDataURL(file);
+      const optimized = await optimizeImageFile(file, 1280, 0.82);
+      if (!optimized) return;
+
+      const certs = getCertificates();
+      const cert = certs.find(c => c.id == certId);
+      if (cert) {
+        cert.image = optimized;
+        saveCertificates(certs);
+      }
+
+      SafeStorage.set('cert_img_' + certId, optimized);
+      try {
+        localStorage.setItem('shreyas_cert_img_' + certId, optimized);
+      } catch (err) {}
+
+      renderCertificates();
+      if (typeof renderHubItems === 'function') renderHubItems();
+      showToast('Certificate image saved permanently!');
     }
 
     function openAddCertModal() {
@@ -2450,9 +2575,9 @@ html_template = '''<!DOCTYPE html>
       };
 
       if (fileInput.files[0]) {
-        const reader = new FileReader();
-        reader.onload = (ev) => proceed(ev.target.result);
-        reader.readAsDataURL(fileInput.files[0]);
+        optimizeImageFile(fileInput.files[0], 1280, 0.82).then(optimized => {
+          proceed(optimized);
+        });
       } else {
         proceed(null);
       }
@@ -3303,8 +3428,11 @@ html_template = '''<!DOCTYPE html>
         renderDrawings();
         if (typeof renderHubItems === 'function') renderHubItems();
       } else {
-        const current = getDrawings();
-        dbSaveDrawings(current);
+        // Only seed if localStorage has no prior custom drawings
+        const fromLocal = getDrawings();
+        if (fromLocal && fromLocal.length > 0) {
+          dbSaveDrawings(fromLocal);
+        }
       }
     });
 
@@ -4352,6 +4480,27 @@ html_template = '''<!DOCTYPE html>
       }
     }
 
+        function exportLivePortfolioHtml() {
+      showToast('Preparing complete portfolio export...');
+      setTimeout(() => {
+        // Deep clone current HTML
+        let fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+        // Create Blob and trigger download
+        const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'index.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        showToast('Downloaded updated index.html! Push to GitHub or drop onto Netlify Drop to make your changes visible to everyone.');
+      }, 300);
+    }
+
     function openEditOptionsHubModal() {
       renderHubItems();
       document.getElementById('editOptionsHubModal').classList.remove('hidden');
@@ -4470,18 +4619,24 @@ html_template = '''<!DOCTYPE html>
       }, 'Enter password to upload certificate');
     }
 
-    function handleProfilePhotoChange(e) {
+    async function handleProfilePhotoChange(e) {
       const file = e.target.files && e.target.files[0];
       if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        const dataUrl = ev.target.result;
-        localStorage.setItem('shreyas_custom_avatar_img', dataUrl);
-        const img = document.getElementById('profilePhotoImg');
-        if (img) img.src = dataUrl;
-        showToast('Profile photo updated successfully!');
-      };
-      reader.readAsDataURL(file);
+
+      const optimized = await optimizeImageFile(file, 800, 0.82);
+      if (!optimized) return;
+
+      const img = document.getElementById('profilePhotoImg');
+      if (img) img.src = optimized;
+
+      // Persist across all keys and IndexedDB
+      SafeStorage.set('profile_photo', optimized);
+      try {
+        localStorage.setItem('shreyas_uploaded_profile_photo', optimized);
+        localStorage.setItem('shreyas_custom_avatar_img', optimized);
+      } catch (err) {}
+
+      showToast('Profile photo updated and saved permanently!');
     }
 
     // -------------------------------------------------------------------------
