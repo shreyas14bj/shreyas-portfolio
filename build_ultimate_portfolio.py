@@ -152,6 +152,14 @@ html_template = '''<!DOCTYPE html>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <style>
+    html {
+      scroll-behavior: smooth !important;
+      scroll-padding-top: 5.5rem !important;
+    }
+    section[id] {
+      scroll-margin-top: 5.5rem !important;
+    }
+
     /* CSS Root Variables for Luxurious Premium Palette */
     :root {
       /* Clean High-Contrast Slate & Deep Burnished Bronze (Light Mode) */
@@ -532,7 +540,7 @@ html_template = '''<!DOCTYPE html>
     
     <!-- Top Row: Logo, Theme Toggle, Messages Badge & CTAs -->
     <div class="flex items-center justify-between w-full md:w-auto">
-      <a href="#hero" class="flex items-center space-x-2 group">
+      <a href="#hero" onclick="event.preventDefault(); scrollToSection('hero')" class="flex items-center space-x-2 group">
         <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#38BDF8]"></span>
         <span class="font-display font-bold text-base tracking-tight" style="color: var(--text-main);">SHREYAS B J</span>
         <span class="text-xs font-mono hidden sm:inline" style="color: var(--text-sub);">&bull; AI/ML Engineer @ TCS</span>
@@ -560,13 +568,13 @@ html_template = '''<!DOCTYPE html>
 
     <!-- Responsive Navigation Links Bar (Visible on ALL Screen Sizes via Horizontal Scroll) -->
     <nav class="flex items-center space-x-1 sm:space-x-2 overflow-x-auto no-scrollbar py-1 text-xs font-mono w-full md:w-auto">
-      <a href="#about" class="px-3 py-1.5 rounded-lg hover:text-cyan-400 whitespace-nowrap transition-colors" style="color: var(--text-muted);">ABOUT</a>
-      <a href="#professional" class="px-3 py-1.5 rounded-lg hover:text-cyan-400 whitespace-nowrap transition-colors" style="color: var(--text-muted);">PROFESSIONAL</a>
-      <a href="#education" class="px-3 py-1.5 rounded-lg hover:text-cyan-400 whitespace-nowrap transition-colors" style="color: var(--text-muted);">EDUCATION</a>
-      <a href="#arsenal" class="px-3 py-1.5 rounded-lg hover:text-cyan-400 whitespace-nowrap transition-colors" style="color: var(--text-muted);">CERTIFICATIONS</a>
-      <a href="#projects" class="px-3 py-1.5 rounded-lg hover:text-cyan-400 whitespace-nowrap transition-colors" style="color: var(--text-muted);">PROJECTS</a>
-      <a href="#sketches" class="px-3 py-1.5 rounded-lg hover:text-gold-400 whitespace-nowrap transition-colors" style="color: var(--text-muted);">SKETCHES</a>
-      <a href="#contact" class="px-3 py-1.5 rounded-lg hover:text-cyan-400 whitespace-nowrap transition-colors" style="color: var(--text-muted);">CONTACT</a>
+      <a href="#about" onclick="event.preventDefault(); scrollToSection('about')" class="px-3 py-1.5 rounded-lg hover:text-cyan-400 whitespace-nowrap transition-colors" style="color: var(--text-muted);">ABOUT</a>
+      <a href="#professional" onclick="event.preventDefault(); scrollToSection('professional')" class="px-3 py-1.5 rounded-lg hover:text-cyan-400 whitespace-nowrap transition-colors" style="color: var(--text-muted);">PROFESSIONAL</a>
+      <a href="#education" onclick="event.preventDefault(); scrollToSection('education')" class="px-3 py-1.5 rounded-lg hover:text-cyan-400 whitespace-nowrap transition-colors" style="color: var(--text-muted);">EDUCATION</a>
+      <a href="#arsenal" onclick="event.preventDefault(); scrollToSection('arsenal')" class="px-3 py-1.5 rounded-lg hover:text-cyan-400 whitespace-nowrap transition-colors" style="color: var(--text-muted);">CERTIFICATIONS</a>
+      <a href="#projects" onclick="event.preventDefault(); scrollToSection('projects')" class="px-3 py-1.5 rounded-lg hover:text-cyan-400 whitespace-nowrap transition-colors" style="color: var(--text-muted);">PROJECTS</a>
+      <a href="#sketches" onclick="event.preventDefault(); scrollToSection('sketches')" class="px-3 py-1.5 rounded-lg hover:text-gold-400 whitespace-nowrap transition-colors" style="color: var(--text-muted);">SKETCHES</a>
+      <a href="#contact" onclick="event.preventDefault(); scrollToSection('contact')" class="px-3 py-1.5 rounded-lg hover:text-cyan-400 whitespace-nowrap transition-colors" style="color: var(--text-muted);">CONTACT</a>
     </nav>
 
     <!-- Desktop Controls -->
@@ -589,7 +597,7 @@ html_template = '''<!DOCTYPE html>
         <i id="themeIconDesktop" data-lucide="sun" class="w-4 h-4 text-amber-400"></i>
       </button>
 
-      <a href="#contact" class="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-white dark:text-noir-950 font-display font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(14,165,233,0.3)]">
+      <a href="#contact" onclick="event.preventDefault(); scrollToSection('contact')" class="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-white dark:text-noir-950 font-display font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(14,165,233,0.3)]">
         GET IN TOUCH
       </a>
     </div>
@@ -690,11 +698,11 @@ html_template = '''<!DOCTYPE html>
 
       <!-- Hero Actions -->
       <div class="pt-2 flex flex-wrap items-center justify-center gap-3.5">
-        <a href="#about" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-display font-bold text-xs uppercase tracking-wider transition-all flex items-center space-x-2 shadow-lg shadow-cyan-500/20">
+        <a href="#about" onclick="event.preventDefault(); scrollToSection('about')" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-display font-bold text-xs uppercase tracking-wider transition-all flex items-center space-x-2 shadow-lg shadow-cyan-500/20">
           <span>EXPLORE PORTFOLIO</span>
           <i data-lucide="arrow-down" class="w-4 h-4"></i>
         </a>
-        <a href="#projects" class="px-6 py-3 rounded-xl border hover:border-amber-400/60 font-display font-bold text-xs uppercase tracking-wider transition-all flex items-center space-x-2" style="background-color: var(--card-bg); border-color: var(--card-border); color: var(--text-main);">
+        <a href="#projects" onclick="event.preventDefault(); scrollToSection('projects')" class="px-6 py-3 rounded-xl border hover:border-amber-400/60 font-display font-bold text-xs uppercase tracking-wider transition-all flex items-center space-x-2" style="background-color: var(--card-bg); border-color: var(--card-border); color: var(--text-main);">
           <i data-lucide="code" class="w-4 h-4 text-amber-400"></i>
           <span>VIEW 4 PROJECTS</span>
         </a>
@@ -1956,6 +1964,62 @@ html_template = '''<!DOCTYPE html>
   <!-- JAVASCRIPT MASTER ENGINE -->
   <!-- ========================================================================= -->
   <script>
+    // =========================================================================
+    // UNIVERSAL NAVIGATION & SMOOTH SCROLLING ENGINE (IFRAME & STANDALONE AWARE)
+    // =========================================================================
+    function scrollToSection(targetId) {
+      if (!targetId) return;
+      const cleanId = String(targetId).replace(/^#/, '');
+      const targetEl = document.getElementById(cleanId);
+      if (!targetEl) return;
+
+      const header = document.querySelector('header');
+      const headerHeight = header ? header.offsetHeight : 80;
+      
+      const elementRect = targetEl.getBoundingClientRect();
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      const targetTop = elementRect.top + currentScroll;
+      const finalY = Math.max(0, targetTop - headerHeight - 16);
+
+      try {
+        window.scrollTo({
+          top: finalY,
+          behavior: 'smooth'
+        });
+      } catch (err) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      // Fail-safe guarantee for iframe environments (Streamlit)
+      setTimeout(() => {
+        const currentY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        if (Math.abs(currentY - finalY) > 80) {
+          window.scrollTo(0, finalY);
+        }
+      }, 350);
+
+      try {
+        history.pushState(null, null, '#' + cleanId);
+      } catch (err) {}
+    }
+    window.scrollToSection = scrollToSection;
+
+    // Sitewide delegated click listener ensuring all internal # links smoothly scroll
+    document.addEventListener('click', function(e) {
+      const anchor = e.target.closest('a[href^="#"]');
+      if (!anchor) return;
+      const href = anchor.getAttribute('href');
+      if (href && href.startsWith('#') && href.length > 1) {
+        const targetId = href.substring(1);
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          e.preventDefault();
+          e.stopPropagation();
+          scrollToSection(targetId);
+        }
+      }
+    });
+
     // -------------------------------------------------------------------------
     // 0. CORE AUTHENTICATION ENGINE (ACCESSIBLE TO ALL SCRIPT CALLS SITEWIDE)
     // -------------------------------------------------------------------------
