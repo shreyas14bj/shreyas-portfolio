@@ -1914,6 +1914,14 @@ html_template = '''<!DOCTYPE html>
       if (isAuthorized()) {
         if (typeof actionFn === 'function') actionFn();
       } else {
+        var inIframe = false;
+        try { inIframe = window.self !== window.top; } catch(e) { inIframe = true; }
+        if (inIframe) {
+          pendingAuthAction = actionFn;
+          openAuthModal(promptMsg);
+          return;
+        }
+
         let pass = null;
         try {
           pass = window.prompt(promptMsg || "Security Authorization Required:\\nEnter password to unlock portfolio editing:");
@@ -4568,6 +4576,13 @@ html_template = '''<!DOCTYPE html>
     function handleTopEditOptionsClick() {
       if (isAuthorized()) {
         lockEditing();
+        return;
+      }
+
+      var inIframe = false;
+      try { inIframe = window.self !== window.top; } catch(e) { inIframe = true; }
+      if (inIframe) {
+        openAuthModal("Enter password to unlock portfolio editing");
         return;
       }
 

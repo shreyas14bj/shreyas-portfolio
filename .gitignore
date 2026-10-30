@@ -4,3 +4,6 @@ Thumbs.db
 *.log
 *.zip
 .system_generated/
+
+__pycache__/
+*.pyc
