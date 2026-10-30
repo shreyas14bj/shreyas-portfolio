@@ -2411,7 +2411,7 @@ html_template = '''<!DOCTYPE html>
         id: 1,
         title: 'Databricks Certified Machine Learning Engineer Associate',
         issuer: 'DATABRICKS',
-        # credId: 'CERT-DB-ML',
+        // credId: 'CERT-DB-ML',
         desc: 'Distributed Apache Spark compute, feature store management, MLflow model governance, and scalable production deployment on Databricks Lakehouse platform. (Oct 2026 – Oct 2028)',
         image: null
       },
@@ -2419,7 +2419,7 @@ html_template = '''<!DOCTYPE html>
         id: 2,
         title: 'Claude Certified Developer - Foundations',
         issuer: 'ANTHROPIC CLAUDE',
-        # credId: 'CERT-ANTH-01',
+        // credId: 'CERT-ANTH-01',
         desc: 'Multi-turn agentic workflows, chain-of-thought steering, structured XML parsing, and LLM-based application development. (Aug 2026 – Aug 2027)',
         image: null
       },
@@ -2427,7 +2427,7 @@ html_template = '''<!DOCTYPE html>
         id: 3,
         title: 'Build With Gemini',
         issuer: 'GOOGLE CLOUD',
-        # credId: 'CERT-GCP-GEM',
+        // credId: 'CERT-GCP-GEM',
         desc: 'Hands-on experience developing AI-powered solutions using Google Gemini and generative AI capabilities, multimodal vision models, and Vertex AI. (Oct 2026)',
         image: null
       },
@@ -2435,7 +2435,7 @@ html_template = '''<!DOCTYPE html>
         id: 4,
         title: 'Introduction to Generative AI',
         issuer: 'NXT WAVE',
-        # credId: 'CERT-NXT-GENAI',
+        // credId: 'CERT-NXT-GENAI',
         desc: 'Fundamentals of Generative AI, building neural network models, deep learning foundations, and AI-generated content architectures. (Sep 2024)',
         image: null
       },
@@ -2443,7 +2443,7 @@ html_template = '''<!DOCTYPE html>
         id: 5,
         title: 'Programming in Java',
         issuer: 'NPTEL',
-        # credId: 'CERT-NPTEL-JAVA',
+        // credId: 'CERT-NPTEL-JAVA',
         desc: 'Completed structured course covering core Java programming concepts, object-oriented principles, and algorithmic problem-solving. (Oct 2024)',
         image: null
       },
@@ -2451,7 +2451,7 @@ html_template = '''<!DOCTYPE html>
         id: 6,
         title: 'Skill Enhancement Course',
         issuer: 'VTU Belgum',
-        # credId: 'CERT-TH-PYTHON',
+        // credId: 'CERT-TH-PYTHON',
         desc: 'Learn to build intelligent, dynamic, and responsive web applications by integrating AI-powered features into React development. (Dec 2024 – May 2025)',
         image: null
       }
@@ -3472,64 +3472,414 @@ html_template = '''<!DOCTYPE html>
     // -------------------------------------------------------------------------
     // 6. OBSERVATIONAL SKETCH STUDIO (HIGH-CAPACITY INDEXEDDB + CANVAS COMPRESSION)
     // -------------------------------------------------------------------------
-    const DRAWINGS_KEY = 'shreyas_drawing_feed_v5';
-    const ART_DB_NAME = 'ShreyasArtStudioDB';
+    const DRAWINGS_KEY = 'shreyas_drawing_feed_v7';
+    const ART_DB_NAME = 'ShreyasArtStudioDB_v7';
     const ART_DB_STORE = 'sketchbook';
     let cachedDrawings = null;
     let draftDrawings = [];
 
     const DEFAULT_DRAWINGS = [
       {
-        id: "drawing_ganesha",
-        title: "Ganesha",
-        medium: "Free Hand Drawing • A4 Sheet",
-        caption: "Original observational sketch featuring divine countenance, crown ornamentation, and traditional Indian sacred iconography.",
-        image: "./assets/drawings/ganesha.png",
-        date: "Oct 29, 2026",
-        likes: 18,
-        isLiked: true
+            "id": "art_ganesha_radiance",
+            "title": "Lord Ganesha - Sacred Radiance",
+            "medium": "Freehand Sketch \u2022 Sacred Art",
+            "caption": "Intricate crown ornamentation, trunk curves, and divine aura.",
+            "image": "./assets/drawings/ganesha-radiance.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
       },
       {
-        id: "drawing_portrait_study",
-        title: "Forensic Anatomical Study",
-        medium: "Graphite • 2B / 4B on Hot Press",
-        caption: "Observational facial morphology and lighting planes study.",
-        image: "./assets/drawings/drawing-portrait.svg",
-        date: "Oct 28, 2026",
-        likes: 14,
-        isLiked: false
+            "id": "art_ganesha_blessing",
+            "title": "Lord Ganesha - Divine Blessing",
+            "medium": "Pencil Art \u2022 Traditional Form",
+            "caption": "Benevolent countenance featuring traditional modak and blessing mudra.",
+            "image": "./assets/drawings/ganesha-blessing.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
       },
       {
-        id: "drawing_architectural_grid",
-        title: "Monolithic Structural Grid",
-        medium: "Ink & Charcoal • Cold Press",
-        caption: "Structural elevation and perspective geometry analysis.",
-        image: "./assets/drawings/drawing-architecture.svg",
-        date: "Oct 27, 2026",
-        likes: 21,
-        isLiked: false
+            "id": "art_ganesha_cosmic",
+            "title": "Lord Ganesha - Cosmic Silhouette",
+            "medium": "Ink & Graphite Sketch",
+            "caption": "Sacred motifs and dynamic spiritual symmetry.",
+            "image": "./assets/drawings/ganesha-cosmic.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
       },
       {
-        id: "drawing_cybernetic_sensor",
-        title: "Machine Optical Sensor",
-        medium: "Pencil & Technical Pen",
-        caption: "Biomechanical hardware schematics & isometric perspective.",
-        image: "./assets/drawings/drawing-cybernetic.svg",
-        date: "Oct 26, 2026",
-        likes: 16,
-        isLiked: false
+            "id": "art_ganesha_parvati",
+            "title": "Maa Parvati & Little Ganesha",
+            "medium": "Observational Sketch \u2022 Devotional",
+            "caption": "Maternal affection and divine protection depicted with tender linework.",
+            "image": "./assets/drawings/ganesha-parvati.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
       },
       {
-        id: "drawing_western_ghats",
-        title: "Chikkamagaluru Ridge Terrain",
-        medium: "Graphite Shading Study",
-        caption: "Atmospheric ridge contour and landscape tonality exploration.",
-        image: "./assets/drawings/drawing-landscape.svg",
-        date: "Oct 25, 2026",
-        likes: 27,
-        isLiked: true
+            "id": "art_ganesha_a4",
+            "title": "Lord Ganesha - Divine Countenance",
+            "medium": "Free Hand Drawing \u2022 A4 Sheet",
+            "caption": "Original observational sketch featuring divine countenance, crown ornamentation, and traditional Indian sacred iconography.",
+            "image": "./assets/drawings/ganesha.png",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_mahadev_trance",
+            "title": "Mahadev - Meditative Trance",
+            "medium": "Deep Tonal Graphite Sketch",
+            "caption": "Adiyogi in supreme meditative silence with sacred Rudraksha and ash markings.",
+            "image": "./assets/drawings/mahadev-trance.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_lord_shiva_crescent",
+            "title": "Lord Shiva - Crescent Moon",
+            "medium": "Charcoal & Pencil Art",
+            "caption": "Sacred Trishula, Damru, crescent moon, and flowing Ganga locks.",
+            "image": "./assets/drawings/lord-shiva-crescent.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_maa_kaali",
+            "title": "Maa Kaali - Transcendental Force",
+            "medium": "Bold Charcoal & Ink Art",
+            "caption": "Fierce expression, cosmic garland, and primal energy of the Supreme Mother.",
+            "image": "./assets/drawings/maa-kaali.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_durga_devi",
+            "title": "Maa Durga - Divine Ferocity & Grace",
+            "medium": "Freehand Pen & Ink \u2022 Sacred Art",
+            "caption": "Sacred traditional iconography with ornate trident and regal adornments.",
+            "image": "./assets/drawings/durga-devi.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_lord_narasimha",
+            "title": "Lord Narasimha - Fierce Avatar",
+            "medium": "Dynamic Ink & Charcoal",
+            "caption": "Roaring lion visage, mane volume, and supreme cosmic fury of the protector avatar.",
+            "image": "./assets/drawings/lord-narasimha.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_sri_rama_kodanda",
+            "title": "Maryada Purushottama Sri Rama",
+            "medium": "Graphite Sacred Portrait",
+            "caption": "Righteous bow (Kodanda), quivering arrows, and calm noble countenance.",
+            "image": "./assets/drawings/sri-rama-kodanda.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_sita_rama",
+            "title": "Siya Ram - Ayodhya Divine Couple",
+            "medium": "Freehand Devotional Portrait",
+            "caption": "Epitome of dharma, royal humility, and divine companionship.",
+            "image": "./assets/drawings/sita-rama.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_ayodhya_ram_mandir",
+            "title": "Ayodhya Ram Mandir Architecture",
+            "medium": "Architectural Perspective Sketch",
+            "caption": "Nagara style temple architecture, intricate shikhara spires, and carved pillars.",
+            "image": "./assets/drawings/ayodhya-ram-mandir.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_veera_hanuman",
+            "title": "Veera Hanuman - Strength & Humility",
+            "medium": "Charcoal & Dark Graphite",
+            "caption": "Intense muscular definition, devotion, and resolute gaze of Lord Hanuman.",
+            "image": "./assets/drawings/veera-hanuman.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_hanuman_pen_art",
+            "title": "Sankat Mochan - Detailed Pen Work",
+            "medium": "Fine Linework Pen Art",
+            "caption": "Intricate mace (Gada), sacred Tilak, and devotional reverence in fine ink.",
+            "image": "./assets/drawings/hanuman-pen-art.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_hanuman_pencil_art",
+            "title": "Bajarangabali - Graphite Study",
+            "medium": "Graphite Pencil \u2022 Sacred Art",
+            "caption": "Classic profile study with detailed facial contours and ornamentations.",
+            "image": "./assets/drawings/hanuman-pencil-art.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_radha_krishna_harmony",
+            "title": "Radha Krishna - Divine Harmony",
+            "medium": "Mixed Media & Color Accent",
+            "caption": "Sacred flute melody, peacock feather crown, and supreme spiritual resonance.",
+            "image": "./assets/drawings/radha-krishna-harmony.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_radha_krishna_devotion",
+            "title": "Radha Krishna - Sacred Devotion",
+            "medium": "Graphite & Shading Stump",
+            "caption": "Gentle resting pose highlighting divine love and eternal companionship.",
+            "image": "./assets/drawings/radha-krishna-devotion.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_radha_krishna_soul",
+            "title": "Radha Krishna - Soul Connection",
+            "medium": "Observational Sacred Sketch",
+            "caption": "Transcendent devotional composition capturing sacred flute rhythm.",
+            "image": "./assets/drawings/radha-krishna-soul.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_radha_rani",
+            "title": "Radha Rani - Pure Elegance",
+            "medium": "Soft Graphite Portrait",
+            "caption": "Traditional Indian jewelry, flowing veil, and serene meditative grace.",
+            "image": "./assets/drawings/radha-rani.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_kaanthara_panjurli",
+            "title": "Kantara - Divine Roar of Panjurli",
+            "medium": "Graphite & Charcoal \u2022 Cinematic Art",
+            "caption": "Capturing Rishab Shetty's intense Bhoota Kola trance and mythological fervor.",
+            "image": "./assets/drawings/kaanthara-panjurli.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_rocky_bhai_kgf",
+            "title": "Rocky Bhai - KGF Portrait",
+            "medium": "Dramatic Contrast Charcoal",
+            "caption": "Cinematic chiaroscuro portrait of Yash with rugged beard and intense stare.",
+            "image": "./assets/drawings/rocky-bhai-kgf.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_kgf_chapter_2",
+            "title": "KGF Chapter 2 - Monster Arrives",
+            "medium": "Graphite & Blending Stump",
+            "caption": "Atmospheric dust and raw cinematic gravity from the KGF universe.",
+            "image": "./assets/drawings/kgf-chapter-2.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_raajakumara",
+            "title": "Raajakumara - Puneeth Rajkumar",
+            "medium": "Graphite Pencil \u2022 Portrait Study",
+            "caption": "Tribute sketch celebrating the legacy and warmth of Power Star Puneeth Rajkumar.",
+            "image": "./assets/drawings/raajakumara.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_vikrant_rona",
+            "title": "Vikrant Rona - Kiccha Sudeep",
+            "medium": "Cinematic Noir Portrait",
+            "caption": "Mystery noir lighting, rain-soaked aesthetic, and intense cinematic gaze.",
+            "image": "./assets/drawings/vikrant-rona.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_darshan_portrait",
+            "title": "Challenging Star Darshan",
+            "medium": "Graphite Shading \u2022 Portrait Study",
+            "caption": "Dramatic cinematic lighting and bold facial feature analysis.",
+            "image": "./assets/drawings/darshan-portrait.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_moonu_dhanush",
+            "title": "3 (Moonu) - Dhanush Study",
+            "medium": "Cinematic Portrait Sketch",
+            "caption": "Memorable portrait expressing psychological intensity and emotional vulnerability.",
+            "image": "./assets/drawings/moonu-dhanush.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_mr_bean_caricature",
+            "title": "Mr. Bean - Rowan Atkinson",
+            "medium": "Caricature & Observational Art",
+            "caption": "Playful anatomical study celebrating Rowan Atkinson's iconic comedic expressions.",
+            "image": "./assets/drawings/mr-bean-caricature.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_charlie_777_study",
+            "title": "777 Charlie - Companion Study",
+            "medium": "Charcoal & Pencil \u2022 Observational Study",
+            "caption": "Emotional rendering capturing the soulful gaze of Charlie.",
+            "image": "./assets/drawings/charlie-777-study.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_charlie_portrait",
+            "title": "Charlie - Loyal Canine Portrait",
+            "medium": "Pencil Sketch \u2022 Fur Texture Detail",
+            "caption": "Detailed fur texture and expressive canine facial anatomy.",
+            "image": "./assets/drawings/charlie-portrait.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_eye_hyperrealism",
+            "title": "Hyperrealistic Eye Study",
+            "medium": "Graphite & Blending Stump",
+            "caption": "Detailed corneal reflection, iris striations, and delicate eyelash rendering.",
+            "image": "./assets/drawings/eye-hyperrealism.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_eyes_gaze_study",
+            "title": "The Dual Gaze - Eye Anatomy",
+            "medium": "Graphite & Charcoal",
+            "caption": "Study of human emotional depth conveyed through ocular expressions.",
+            "image": "./assets/drawings/eyes-gaze-study.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_girl_pen_art",
+            "title": "Grace in Ink - Pen Portrait",
+            "medium": "Ballpoint Pen Hatching",
+            "caption": "Flowing hair textures and cross-hatching tonal values created entirely with pen.",
+            "image": "./assets/drawings/girl-pen-art.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_traditional_jhumka",
+            "title": "Traditional Jhumka Ornament",
+            "medium": "Graphite Shading \u2022 Jewelry Study",
+            "caption": "Micro-ornamental detail and specular metal reflections in Indian heritage jewelry.",
+            "image": "./assets/drawings/traditional-jhumka.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_botanical_flowers",
+            "title": "Botanical Floral Study",
+            "medium": "Pencil Sketch \u2022 Petal Contour",
+            "caption": "Delicate petal curves and soft natural gradient shading.",
+            "image": "./assets/drawings/botanical-flowers.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_majestic_peacock",
+            "title": "Mayura - The Sacred Peacock",
+            "medium": "Pencil Feather Texture Study",
+            "caption": "Graceful neck arch and intricate eyelet patterns of royal peacock plumes.",
+            "image": "./assets/drawings/majestic-peacock.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_naga_serpent",
+            "title": "Naga - The Sacred Serpent",
+            "medium": "Textured Ink & Pencil Sketch",
+            "caption": "Detailed reptilian scale rendering and coiled serpentine posture.",
+            "image": "./assets/drawings/naga-serpent.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_eternal_love",
+            "title": "Eternal Embrace - Couple Study",
+            "medium": "Charcoal & Pencil \u2022 Monochromatic",
+            "caption": "Harmonious composition expressing intimacy, warmth, and lifelong commitment.",
+            "image": "./assets/drawings/eternal-love.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_tenderness_kiss",
+            "title": "Tenderness - Intimate Study",
+            "medium": "Soft Graphite \u2022 Romantic Study",
+            "caption": "Subtle emotional nuance and soft facial contours.",
+            "image": "./assets/drawings/tenderness-kiss.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
+      },
+      {
+            "id": "art_mindfulness_reflection",
+            "title": "Mindfulness - Inner Horizon",
+            "medium": "Concept Pen & Pencil Art",
+            "caption": "Surreal contemplation exploring thought architecture and consciousness.",
+            "image": "./assets/drawings/mindfulness-reflection.jpeg",
+            "date": "Oct 2026",
+            "likes": 0,
+            "isLiked": false
       }
-    ];
+];
 
     // IndexedDB Database Engine with virtually unlimited storage (supports 100+ drawings)
     function openArtDB() {
@@ -3600,11 +3950,9 @@ html_template = '''<!DOCTYPE html>
         return cachedDrawings;
       }
       const keys = [
+        'shreyas_drawing_feed_v7',
         'shreyas_drawing_feed_v5',
-        'shreyas_sketch_feed_v2',
-        'shreyas_sketch_feed_posts_v1',
-        'shreyas_sketches',
-        'shreyas_drawing'
+        'shreyas_sketch_feed_v2'
       ];
       for (const k of keys) {
         const stored = localStorage.getItem(k);
@@ -5300,7 +5648,7 @@ html_template = '''<!DOCTYPE html>
             </div>
           </div>
           <div class="space-y-1.5 font-sans">
-            # <span class="text-xs font-mono block font-bold" style="color: var(--text-sub);">Relevant Coursework:</span>
+            <!-- <span class="text-xs font-mono block font-bold" style="color: var(--text-sub);">Relevant Coursework:</span> -->
             <div class="flex flex-wrap gap-2 text-xs font-mono">
               ${(edu.coursework || []).map(c => `<span class="px-2.5 py-1 rounded border text-cyan-400" style="background-color: var(--card-bg-alt); border-color: var(--card-border);">${c}</span>`).join('')}
             </div>
