@@ -989,9 +989,9 @@ html_template = '''<!DOCTYPE html>
               <div class="flex items-center justify-between p-3.5 rounded-xl border" style="background-color: var(--card-bg-alt); border-color: var(--card-border);">
                 <div class="flex items-center space-x-2.5" style="color: var(--text-muted);">
                   <i data-lucide="phone" class="w-4 h-4 text-amber-500"></i>
-                  <span class="select-all">+91 9110464228</span>
+                  <span class="select-all">+91 7204424892</span>
                 </div>
-                <a href="tel:+919110464228" class="text-amber-500 hover:underline text-[11px] font-bold">CALL</a>
+                <a href="tel:+917204424892" class="text-amber-500 hover:underline text-[11px] font-bold">CALL</a>
               </div>
 
               <div class="flex items-center justify-between p-3.5 rounded-xl border" style="background-color: var(--card-bg-alt); border-color: var(--card-border); color: var(--text-muted);">
@@ -2389,14 +2389,14 @@ html_template = '''<!DOCTYPE html>
     }
 
     // Synchronous + Asynchronous Profile Photo initialization (Clean v2 key)
-    const syncProfile = localStorage.getItem('shreyas_uploaded_profile_photo_v2');
+    const syncProfile = localStorage.getItem('shreyas_uploaded_profile_photo_v3');
     if (syncProfile && profilePhotoImg) profilePhotoImg.src = syncProfile;
 
-    SafeStorage.get('profile_photo_v2').then(asyncProfile => {
+    SafeStorage.get('profile_photo_v3').then(asyncProfile => {
       if (asyncProfile && profilePhotoImg) {
         profilePhotoImg.src = asyncProfile;
         try {
-          localStorage.setItem('shreyas_uploaded_profile_photo_v2', asyncProfile);
+          localStorage.setItem('shreyas_uploaded_profile_photo_v3', asyncProfile);
         } catch(e) {}
       }
     });
@@ -2456,7 +2456,7 @@ html_template = '''<!DOCTYPE html>
     ];
 
     function getCertificates() {
-      const stored = localStorage.getItem('shreyas_custom_certifications_v2');
+      const stored = localStorage.getItem('shreyas_custom_certifications_v3');
       if (stored) {
         try { return JSON.parse(stored); } catch (e) {}
       }
@@ -2464,7 +2464,7 @@ html_template = '''<!DOCTYPE html>
     }
 
     function saveCertificates(certs) {
-      localStorage.setItem('shreyas_custom_certifications_v2', JSON.stringify(certs));
+      localStorage.setItem('shreyas_custom_certifications_v3', JSON.stringify(certs));
     }
 
     let currentViewerCertId = null;
@@ -3470,8 +3470,8 @@ html_template = '''<!DOCTYPE html>
     // -------------------------------------------------------------------------
     // 6. OBSERVATIONAL SKETCH STUDIO (HIGH-CAPACITY INDEXEDDB + CANVAS COMPRESSION)
     // -------------------------------------------------------------------------
-    const DRAWINGS_KEY = 'shreyas_drawing_feed_v8';
-    const ART_DB_NAME = 'ShreyasArtStudioDB_v8';
+    const DRAWINGS_KEY = 'shreyas_drawing_feed_v9';
+    const ART_DB_NAME = 'ShreyasArtStudioDB_v9';
     const ART_DB_STORE = 'sketchbook';
     let cachedDrawings = null;
     let draftDrawings = [];
@@ -3948,7 +3948,7 @@ html_template = '''<!DOCTYPE html>
         return cachedDrawings;
       }
       const keys = [
-        'shreyas_drawing_feed_v8',
+        'shreyas_drawing_feed_v9',
         'shreyas_drawing_feed_v5',
         'shreyas_sketch_feed_v2'
       ];
