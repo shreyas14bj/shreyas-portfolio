@@ -2388,12 +2388,38 @@ html_template = '''<!DOCTYPE html>
       };
     }
 
+    // Immediate startup cache sanitizer: self-heal any obsolete cached references
+    (function sanitizeObsoleteStorage() {
+      try {
+        const obsoleteKeys = [
+          'shreyas_drawing_feed_v9',
+          'shreyas_drawing_feed_v8',
+          'shreyas_drawing_feed_v5',
+          'shreyas_sketch_feed_v2',
+          'shreyas_custom_certifications_v3',
+          'shreyas_custom_certifications_v2'
+        ];
+        obsoleteKeys.forEach(k => {
+          try { localStorage.removeItem(k); } catch(e) {}
+        });
+        for (let i = 1; i <= 6; i++) {
+          const imgKey = 'shreyas_cert_img_' + i;
+          const val = localStorage.getItem(imgKey);
+          if (val && (val.includes('.svg') || val.startsWith('./assets/') || val.startsWith('assets/'))) {
+            localStorage.removeItem(imgKey);
+          }
+        }
+      } catch (e) {}
+    })();
+
     // Synchronous + Asynchronous Profile Photo initialization (Clean v2 key)
     const syncProfile = localStorage.getItem('shreyas_uploaded_profile_photo_v3');
-    if (syncProfile && profilePhotoImg) profilePhotoImg.src = syncProfile;
+    if (syncProfile && syncProfile.startsWith('data:image/') && profilePhotoImg) {
+      profilePhotoImg.src = syncProfile;
+    }
 
     SafeStorage.get('profile_photo_v3').then(asyncProfile => {
-      if (asyncProfile && profilePhotoImg) {
+      if (asyncProfile && asyncProfile.startsWith('data:image/') && profilePhotoImg) {
         profilePhotoImg.src = asyncProfile;
         try {
           localStorage.setItem('shreyas_uploaded_profile_photo_v3', asyncProfile);
@@ -2407,27 +2433,30 @@ html_template = '''<!DOCTYPE html>
     const DEFAULT_CERTS = [
       {
         id: 1,
-        title: 'Databricks Certified Machine Learning Engineer Associate',
+        title: 'Databricks Certified Machine Learning Associate',
         issuer: 'DATABRICKS',
-        credId: 'CERT-DB-ML-2026',
-        desc: 'Distributed Apache Spark compute, feature store management, MLflow model governance, and scalable production deployment on Databricks Lakehouse platform. (Oct 2026 – Oct 2028)',
-        image: './assets/certs/databricks-cert.svg'
+        credId: '198150158',
+        desc: 'Distributed Apache Spark compute, feature store management, MLflow model governance, and scalable production deployment on Databricks Lakehouse platform. (Oct 24, 2026 – Oct 24, 2028)',
+        image: './assets/certs/databricks-cert.png',
+        verifyUrl: 'https://credentials.databricks.com'
       },
       {
         id: 2,
         title: 'Claude Certified Developer - Foundations',
         issuer: 'ANTHROPIC CLAUDE',
-        credId: 'CERT-ANTH-01-2026',
-        desc: 'Multi-turn agentic workflows, chain-of-thought steering, structured XML parsing, and LLM-based application development. (Aug 2026 – Aug 2027)',
-        image: './assets/certs/claude-cert.svg'
+        credId: '0b74bd32-f207-4464-a3ea-ed38a39ccb0f',
+        desc: 'Multi-turn agentic workflows, chain-of-thought steering, structured XML parsing, and LLM-based application development. (Aug 06, 2026 – Aug 06, 2027)',
+        image: './assets/certs/claude-cert.png',
+        verifyUrl: 'https://www.credly.com/badges/0b74bd32-f207-4464-a3ea-ed38a39ccb0f'
       },
       {
         id: 3,
         title: 'Build With Gemini',
         issuer: 'GOOGLE CLOUD',
-        credId: 'CERT-GCP-GEM-2026',
-        desc: 'Hands-on experience developing AI-powered solutions using Google Gemini and generative AI capabilities, multimodal vision models, and Vertex AI. (Oct 2026)',
-        image: './assets/certs/gemini-cert.svg'
+        credId: 'Wet5emW3',
+        desc: 'Hands-on experience developing AI-powered solutions using Google Gemini and generative AI capabilities, multimodal vision models, and Vertex AI. (Issued: 01 OCT 2026)',
+        image: './assets/certs/gemini-cert.png',
+        verifyUrl: 'https://www.credly.com/go/Wet5emW3'
       },
       {
         id: 4,
@@ -2435,7 +2464,8 @@ html_template = '''<!DOCTYPE html>
         issuer: 'NXT WAVE',
         credId: 'NXTWAVE-GENAI-2024',
         desc: 'Fundamentals of Generative AI, building neural network models, deep learning foundations, and AI-generated content architectures. (Sep 2024)',
-        image: './assets/certs/nxtwave-cert.jpg'
+        image: './assets/certs/nxtwave-cert.jpg',
+        verifyUrl: 'https://www.ccbp.in'
       },
       {
         id: 5,
@@ -2443,7 +2473,8 @@ html_template = '''<!DOCTYPE html>
         issuer: 'NPTEL',
         credId: 'NPTEL-JAVA-2024',
         desc: 'Completed structured course covering core Java programming concepts, object-oriented principles, and algorithmic problem-solving. (Oct 2024)',
-        image: './assets/certs/nptel-cert.jpg'
+        image: './assets/certs/nptel-cert.jpg',
+        verifyUrl: 'https://nptel.ac.in'
       },
       {
         id: 6,
@@ -2451,20 +2482,40 @@ html_template = '''<!DOCTYPE html>
         issuer: 'VTU Belgum',
         credId: 'VTU-REACT-2025',
         desc: 'Learn to build intelligent, dynamic, and responsive web applications by integrating AI-powered features into React development. (Dec 2024 – May 2025)',
-        image: './assets/certs/react-vtu-cert.jpg'
+        image: './assets/certs/react-vtu-cert.jpg',
+        verifyUrl: 'https://vtu.ac.in'
       }
     ];
 
     function getCertificates() {
-      const stored = localStorage.getItem('shreyas_custom_certifications_v3');
+      const defaultCertMap = new Map();
+      DEFAULT_CERTS.forEach(c => defaultCertMap.set(c.id, c));
+
+      const stored = localStorage.getItem('shreyas_custom_certifications_v5');
       if (stored) {
-        try { return JSON.parse(stored); } catch (e) {}
+        try {
+          let parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            parsed = parsed.map(c => {
+              const def = defaultCertMap.get(c.id);
+              if (def) {
+                if (!c.image || c.image.includes('.svg') || c.image.startsWith('./assets/') || c.image.startsWith('assets/')) {
+                  c.image = def.image;
+                }
+                if (!c.verifyUrl) c.verifyUrl = def.verifyUrl;
+                if (!c.credId || c.credId.startsWith('CERT-')) c.credId = def.credId;
+              }
+              return c;
+            });
+            return parsed;
+          }
+        } catch (e) {}
       }
       return DEFAULT_CERTS;
     }
 
     function saveCertificates(certs) {
-      localStorage.setItem('shreyas_custom_certifications_v3', JSON.stringify(certs));
+      localStorage.setItem('shreyas_custom_certifications_v5', JSON.stringify(certs));
     }
 
     let currentViewerCertId = null;
@@ -2476,7 +2527,13 @@ html_template = '''<!DOCTYPE html>
       const authed = isAuthorized();
 
       container.innerHTML = certs.map((c, idx) => {
-        const savedImg = localStorage.getItem('shreyas_cert_img_' + c.id) || c.image;
+        let savedImg = localStorage.getItem('shreyas_cert_img_' + c.id);
+        if (savedImg && (savedImg.includes('.svg') || savedImg.startsWith('./assets/') || savedImg.startsWith('assets/'))) {
+          localStorage.removeItem('shreyas_cert_img_' + c.id);
+          savedImg = null;
+        }
+        savedImg = savedImg || c.image;
+
         return `
           <div class="interactive-card p-6 flex flex-col justify-between space-y-4 cursor-pointer group" onclick="openCertViewer(${c.id})">
             <div class="space-y-3">
@@ -2492,8 +2549,8 @@ html_template = '''<!DOCTYPE html>
               <p class="text-xs text-justify-pretty leading-relaxed" style="color: var(--text-muted);">${c.desc}</p>
 
               <!-- Image Placeholder Frame (Click to open full view) -->
-              <div class="relative rounded-xl overflow-hidden border h-36 flex items-center justify-center group/img transition-all" style="background-color: var(--card-bg-alt); border-color: var(--card-border);">
-                <img id="certImg_${c.id}" src="${savedImg || ''}" class="${savedImg ? '' : 'hidden'} w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300">
+              <div class="relative rounded-xl overflow-hidden border h-44 flex items-center justify-center group/img transition-all bg-slate-900/60 p-1.5" style="border-color: var(--card-border);">
+                <img id="certImg_${c.id}" src="${savedImg || ''}" alt="${c.title}" class="${savedImg ? '' : 'hidden'} max-h-full max-w-full object-contain rounded-lg filter drop-shadow group-hover/img:scale-105 transition-transform duration-300" onerror="this.classList.add('hidden'); document.getElementById('certPlaceholder_${c.id}')?.classList.remove('hidden');">
                 <div id="certPlaceholder_${c.id}" class="${savedImg ? 'hidden' : ''} text-center p-3 group-hover/img:scale-105 transition-transform">
                   <i data-lucide="award" class="w-8 h-8 text-amber-400 mx-auto mb-1 opacity-80"></i>
                   <span class="text-[11px] font-mono block font-bold" style="color: var(--text-main);">${c.issuer} Credential Plaque</span>
@@ -2524,7 +2581,7 @@ html_template = '''<!DOCTYPE html>
                   </button>
                 ` : ''}
               </div>
-              <span class="text-[10px] font-mono text-cyan-500">Credential ID: #${idx + 1}</span>
+              <span class="text-[10px] font-mono text-cyan-500">Credential ID: #${c.credId || (idx + 1)}</span>
             </div>
           </div>
         `;
@@ -2579,12 +2636,16 @@ html_template = '''<!DOCTYPE html>
       if (descEl) descEl.textContent = cert.desc;
       
       if (verifyLink) {
-        let url = 'https://www.linkedin.com/in/shreyas-b-j-975988226';
-        const iss = cert.issuer.toUpperCase();
-        if (iss.includes('DATABRICKS')) url = 'https://credentials.databricks.com';
-        else if (iss.includes('GOOGLE')) url = 'https://cloud.google.com/certification';
-        else if (iss.includes('ANTHROPIC')) url = 'https://www.anthropic.com';
-        else if (iss.includes('NPTEL') || iss.includes('IIT')) url = 'https://nptel.ac.in';
+        let url = cert.verifyUrl;
+        if (!url) {
+          if (cert.id === 1) url = 'https://credentials.databricks.com';
+          else if (cert.id === 2) url = 'https://www.credly.com/badges/0b74bd32-f207-4464-a3ea-ed38a39ccb0f';
+          else if (cert.id === 3) url = 'https://www.credly.com/go/Wet5emW3';
+          else if (cert.id === 4) url = 'https://www.ccbp.in';
+          else if (cert.id === 5) url = 'https://nptel.ac.in';
+          else if (cert.id === 6) url = 'https://vtu.ac.in';
+          else url = 'https://www.linkedin.com/in/shreyas-b-j-975988226';
+        }
         verifyLink.href = url;
       }
 
@@ -2594,15 +2655,20 @@ html_template = '''<!DOCTYPE html>
     function renderViewerCertContent(cert) {
       const content = document.getElementById('viewerCertContent');
       if (!content) return;
-      const savedImg = localStorage.getItem('shreyas_cert_img_' + cert.id) || cert.image;
+      let savedImg = localStorage.getItem('shreyas_cert_img_' + cert.id);
+      if (savedImg && (savedImg.includes('.svg') || savedImg.startsWith('./assets/') || savedImg.startsWith('assets/'))) {
+        localStorage.removeItem('shreyas_cert_img_' + cert.id);
+        savedImg = null;
+      }
+      savedImg = savedImg || cert.image;
 
       if (savedImg) {
         content.innerHTML = `
-          <div class="relative p-2 sm:p-4 rounded-xl flex items-center justify-center bg-black/40">
-            <img src="${savedImg}" class="max-h-[380px] sm:max-h-[460px] w-auto max-w-full rounded-xl shadow-2xl object-contain border border-amber-500/30">
+          <div class="relative p-2 sm:p-4 rounded-xl flex items-center justify-center bg-black/60 max-w-4xl mx-auto">
+            <img src="${savedImg}" alt="${cert.title}" class="max-h-[70vh] sm:max-h-[78vh] w-auto max-w-full rounded-xl shadow-2xl object-contain border border-amber-500/40">
             <div class="absolute bottom-4 right-4 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-amber-500/40 text-[10px] font-mono text-amber-300 font-bold flex items-center space-x-1.5 shadow-lg">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span>HIGH-RESOLUTION OFFICIAL SCAN</span>
+              <span>AUTHENTIC CERTIFICATE SCAN</span>
             </div>
           </div>
         `;
@@ -3470,8 +3536,8 @@ html_template = '''<!DOCTYPE html>
     // -------------------------------------------------------------------------
     // 6. OBSERVATIONAL SKETCH STUDIO (HIGH-CAPACITY INDEXEDDB + CANVAS COMPRESSION)
     // -------------------------------------------------------------------------
-    const DRAWINGS_KEY = 'shreyas_drawing_feed_v9';
-    const ART_DB_NAME = 'ShreyasArtStudioDB_v9';
+    const DRAWINGS_KEY = 'shreyas_drawing_feed_v11';
+    const ART_DB_NAME = 'ShreyasArtStudioDB_v11';
     const ART_DB_STORE = 'sketchbook';
     let cachedDrawings = null;
     let draftDrawings = [];
@@ -3947,17 +4013,33 @@ html_template = '''<!DOCTYPE html>
       if (cachedDrawings && Array.isArray(cachedDrawings) && cachedDrawings.length > 0) {
         return cachedDrawings;
       }
+      const defaultMap = new Map();
+      DEFAULT_DRAWINGS.forEach(d => defaultMap.set(d.id, d.image));
+
       const keys = [
-        'shreyas_drawing_feed_v9',
-        'shreyas_drawing_feed_v5',
-        'shreyas_sketch_feed_v2'
+        'shreyas_drawing_feed_v11',
+        'shreyas_drawing_feed_v10',
+        'shreyas_drawing_feed_v9'
       ];
       for (const k of keys) {
         const stored = localStorage.getItem(k);
         if (stored) {
           try {
-            const parsed = JSON.parse(stored);
+            let parsed = JSON.parse(stored);
             if (Array.isArray(parsed) && parsed.length > 0) {
+              let changed = false;
+              parsed = parsed.map(p => {
+                if (!p.image || p.image.startsWith('./assets/') || p.image.startsWith('/assets/') || p.image.startsWith('assets/')) {
+                  if (defaultMap.has(p.id)) {
+                    p.image = defaultMap.get(p.id);
+                    changed = true;
+                  }
+                }
+                return p;
+              });
+              if (changed) {
+                try { localStorage.setItem('shreyas_drawing_feed_v11', JSON.stringify(parsed)); } catch(e) {}
+              }
               cachedDrawings = parsed;
               return cachedDrawings;
             }
@@ -3985,16 +4067,30 @@ html_template = '''<!DOCTYPE html>
     // Startup background sync from IndexedDB
     dbGetDrawings().then(storedItems => {
       if (storedItems && Array.isArray(storedItems) && storedItems.length > 0) {
+        const defaultMap = new Map();
+        DEFAULT_DRAWINGS.forEach(d => defaultMap.set(d.id, d.image));
+        let changed = false;
+        storedItems = storedItems.map(p => {
+          if (!p.image || p.image.startsWith('./assets/') || p.image.startsWith('/assets/') || p.image.startsWith('assets/')) {
+            if (defaultMap.has(p.id)) {
+              p.image = defaultMap.get(p.id);
+              changed = true;
+            }
+          }
+          return p;
+        });
+        if (changed) dbSaveDrawings(storedItems);
         cachedDrawings = storedItems;
         renderDrawings();
         if (typeof renderHubItems === 'function') renderHubItems();
       } else {
-        // Only seed if localStorage has no prior custom drawings
         const fromLocal = getDrawings();
         if (fromLocal && fromLocal.length > 0) {
           dbSaveDrawings(fromLocal);
         }
       }
+    }).catch(err => {
+      console.warn('IndexedDB initial sync failed, fallback to memory:', err);
     });
 
     // High-performance Canvas compressor: Resizes large camera photos to max 1600px at 85% quality
@@ -4222,7 +4318,7 @@ html_template = '''<!DOCTYPE html>
             <div class="absolute inset-0 bg-cover bg-center filter blur-md opacity-25 scale-110 pointer-events-none" style="background-image: url('${post.image}');"></div>
 
             <!-- Drawing Image with smooth aspect ratio fit -->
-            <img src="${post.image}" alt="${post.title}" class="relative z-10 max-h-full max-w-full object-contain filter drop-shadow-md transition-transform duration-300 group-hover/img:scale-105">
+            <img src="${post.image}" alt="${post.title}" class="relative z-10 max-h-full max-w-full object-contain filter drop-shadow-md transition-transform duration-300 group-hover/img:scale-105" onerror="this.onerror=null; const def = DEFAULT_DRAWINGS.find(d => d.id === '${post.id}'); if(def && def.image) { this.src = def.image; if(this.previousElementSibling) this.previousElementSibling.style.backgroundImage = 'url(' + def.image + ')'; }">
 
             <!-- Hover Full View Badge -->
             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity z-20 flex items-center justify-center pointer-events-none">
