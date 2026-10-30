@@ -3472,8 +3472,8 @@ html_template = '''<!DOCTYPE html>
     // -------------------------------------------------------------------------
     // 6. OBSERVATIONAL SKETCH STUDIO (HIGH-CAPACITY INDEXEDDB + CANVAS COMPRESSION)
     // -------------------------------------------------------------------------
-    const DRAWINGS_KEY = 'shreyas_drawing_feed_v7';
-    const ART_DB_NAME = 'ShreyasArtStudioDB_v7';
+    const DRAWINGS_KEY = 'shreyas_drawing_feed_v8';
+    const ART_DB_NAME = 'ShreyasArtStudioDB_v8';
     const ART_DB_STORE = 'sketchbook';
     let cachedDrawings = null;
     let draftDrawings = [];
@@ -3950,7 +3950,7 @@ html_template = '''<!DOCTYPE html>
         return cachedDrawings;
       }
       const keys = [
-        'shreyas_drawing_feed_v7',
+        'shreyas_drawing_feed_v8',
         'shreyas_drawing_feed_v5',
         'shreyas_sketch_feed_v2'
       ];
@@ -6040,6 +6040,35 @@ html_template = '''<!DOCTYPE html>
 '''
 
 target_path = r"C:\Users\Sneha Nishani\.gemini\antigravity\scratch\shreyas-cinematic-portfolio\index.html"
+import base64
+import os
+
+# Automatically inline all image assets into Base64 Data URLs so the portfolio is 100% self-contained
+# and renders with zero 404s inside Streamlit iframes, Netlify CDN, mobile phones, and laptops!
+assets_dir = os.path.join(os.path.dirname(target_path), "assets")
+inlined_count = 0
+if os.path.exists(assets_dir):
+    for root, _, files in os.walk(assets_dir):
+        for fn in files:
+            ext = os.path.splitext(fn)[1].lower()
+            if ext in ['.png', '.jpg', '.jpeg', '.svg']:
+                mime = 'image/png' if ext == '.png' else ('image/jpeg' if ext in ['.jpg', '.jpeg'] else 'image/svg+xml')
+                full_p = os.path.join(root, fn)
+                rel_p = os.path.relpath(full_p, os.path.dirname(target_path)).replace('\\', '/')
+                
+                with open(full_p, 'rb') as img_f:
+                    b64_data = base64.b64encode(img_f.read()).decode('ascii')
+                    data_url = f"data:{mime};base64,{b64_data}"
+                
+                # Replace variations like ./assets/... and assets/...
+                variants = [f"./{rel_p}", f"/{rel_p}", rel_p]
+                for v in variants:
+                    if v in html_template:
+                        html_template = html_template.replace(v, data_url)
+                        inlined_count += 1
+
+print(f"Auto-inlined {inlined_count} asset occurrences as Base64 Data URLs")
+
 with open(target_path, "w", encoding="utf-8") as f:
     f.write(html_template)
 
