@@ -437,6 +437,11 @@ html_template = '''<!DOCTYPE html>
           <i id="globalEditToggleIconMobile" data-lucide="lock" class="w-4 h-4"></i>
         </button>
 
+        <!-- Mobile Header Lock Button (Visible When Authorized) -->
+        <button id="headerLockBtnMobile" onclick="lockEditing()" class="hidden p-2 rounded-xl border border-red-500/40 bg-red-500/10 text-red-400" title="Lock Portfolio (Exit Edit Mode)">
+          <i data-lucide="lock" class="w-4 h-4"></i>
+        </button>
+
         <!-- Dark / Light Mode Toggle Button -->
         <button onclick="toggleThemeMode()" class="p-2 rounded-xl border transition-all" style="background-color: var(--card-bg-alt); border-color: var(--card-border);" title="Toggle Theme">
           <i id="themeIconMobile" data-lucide="sun" class="w-4 h-4 text-amber-400"></i>
@@ -468,6 +473,12 @@ html_template = '''<!DOCTYPE html>
       <button id="globalEditToggleBtnDesktop" onclick="handleTopEditOptionsClick()" class="px-3.5 py-1.5 rounded-xl border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 font-mono text-xs flex items-center space-x-1.5 transition-all shadow-sm" title="Edit Options (Password Protected)">
         <i id="globalEditToggleIconDesktop" data-lucide="lock" class="w-3.5 h-3.5"></i>
         <span id="globalEditToggleLabelDesktop" class="font-bold">EDIT OPTIONS</span>
+      </button>
+
+      <!-- Header Lock Button (Visible When Authorized) -->
+      <button id="headerLockBtnDesktop" onclick="lockEditing()" class="hidden px-3 py-1.5 rounded-xl border border-red-500/40 bg-red-500/10 hover:bg-red-500/20 text-red-400 font-mono text-xs flex items-center space-x-1.5 transition-all shadow-sm" title="Lock Portfolio (Exit Edit Mode)">
+        <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+        <span class="font-bold">LOCK</span>
       </button>
 
       <!-- Theme Switcher -->
@@ -4472,11 +4483,12 @@ html_template = '''<!DOCTYPE html>
 
     function handleTopEditOptionsClick() {
       if (isAuthorized()) {
-        lockEditing();
+        openEditOptionsHubModal();
       } else {
         requireAuth(() => {
-          showToast('Portfolio editing unlocked. Edit options active across sections.');
-        }, 'Enter password to unlock portfolio editing');
+          openEditOptionsHubModal();
+          showToast('Portfolio editing unlocked. Edit Options Studio opened!');
+        }, 'Enter password to open Portfolio Edit Options Studio');
       }
     }
 
@@ -4580,8 +4592,15 @@ html_template = '''<!DOCTYPE html>
     }
 
     function openEditOptionsHubModal() {
+      if (!isAuthorized()) {
+        requireAuth(() => {
+          openEditOptionsHubModal();
+        }, 'Enter password to open Portfolio Edit Options Studio');
+        return;
+      }
       renderHubItems();
-      document.getElementById('editOptionsHubModal').classList.remove('hidden');
+      const modal = document.getElementById('editOptionsHubModal');
+      if (modal) modal.classList.remove('hidden');
       safeCreateIcons();
     }
 
@@ -5138,6 +5157,13 @@ html_template = '''<!DOCTYPE html>
       }, 'Enter password to delete education record');
     }
 
+    
+    function handleDeleteCertificate(id) {
+      if (typeof handleDeleteCert === 'function') {
+        return handleDeleteCert(id);
+      }
+    }
+
     function handleDeleteCert(id) {
       requireAuth(() => {
         const certs = getCertificates();
@@ -5219,6 +5245,7 @@ html_template = '''<!DOCTYPE html>
 
     function lockEditing() {
       isEditAuthorized = false;
+      closeEditOptionsHubModal();
       updateAuthUI();
       showToast('Portfolio editing locked. Viewer mode active.');
     }
@@ -5232,18 +5259,23 @@ html_template = '''<!DOCTYPE html>
       const iconM = document.getElementById('globalEditToggleIconMobile');
       const btnM = document.getElementById('globalEditToggleBtnMobile');
 
+      const lockBtnD = document.getElementById('headerLockBtnDesktop');
+      const lockBtnM = document.getElementById('headerLockBtnMobile');
+
       if (authed) {
-        if (labelD) labelD.textContent = 'EXIT EDIT MODE';
-        if (iconD) iconD.setAttribute('data-lucide', 'unlock');
+        if (labelD) labelD.textContent = 'EDIT OPTIONS STUDIO';
+        if (iconD) iconD.setAttribute('data-lucide', 'sliders');
         if (btnD) {
-          btnD.className = 'px-3.5 py-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-400 font-mono text-xs flex items-center space-x-1.5 transition-all shadow-sm';
-          btnD.title = 'Exit Edit Mode (Lock Portfolio)';
+          btnD.className = 'px-3.5 py-1.5 rounded-xl border border-emerald-500/50 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-mono text-xs flex items-center space-x-1.5 transition-all shadow-md';
+          btnD.title = 'Open Portfolio Edit Options Studio';
         }
-        if (iconM) iconM.setAttribute('data-lucide', 'unlock');
+        if (iconM) iconM.setAttribute('data-lucide', 'sliders');
         if (btnM) {
-          btnM.className = 'p-2 rounded-xl border border-emerald-500/40 bg-emerald-500/15 text-emerald-400';
-          btnM.title = 'Exit Edit Mode (Lock Portfolio)';
+          btnM.className = 'p-2 rounded-xl border border-emerald-500/50 bg-emerald-500/20 text-emerald-300';
+          btnM.title = 'Open Portfolio Edit Options Studio';
         }
+        if (lockBtnD) lockBtnD.classList.remove('hidden');
+        if (lockBtnM) lockBtnM.classList.remove('hidden');
       } else {
         if (labelD) labelD.textContent = 'EDIT OPTIONS';
         if (iconD) iconD.setAttribute('data-lucide', 'lock');
@@ -5256,6 +5288,8 @@ html_template = '''<!DOCTYPE html>
           btnM.className = 'p-2 rounded-xl border border-amber-500/40 bg-amber-500/10 text-amber-400';
           btnM.title = 'Edit Options (Password Protected)';
         }
+        if (lockBtnD) lockBtnD.classList.add('hidden');
+        if (lockBtnM) lockBtnM.classList.add('hidden');
       }
 
       const containers = [
