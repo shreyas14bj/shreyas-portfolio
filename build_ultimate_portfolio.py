@@ -2388,17 +2388,15 @@ html_template = '''<!DOCTYPE html>
       };
     }
 
-    // Synchronous + Asynchronous Profile Photo initialization
-    const syncProfile = localStorage.getItem('shreyas_uploaded_profile_photo') || 
-                        localStorage.getItem('shreyas_custom_avatar_img');
+    // Synchronous + Asynchronous Profile Photo initialization (Clean v2 key)
+    const syncProfile = localStorage.getItem('shreyas_uploaded_profile_photo_v2');
     if (syncProfile && profilePhotoImg) profilePhotoImg.src = syncProfile;
 
-    SafeStorage.get('profile_photo').then(asyncProfile => {
+    SafeStorage.get('profile_photo_v2').then(asyncProfile => {
       if (asyncProfile && profilePhotoImg) {
         profilePhotoImg.src = asyncProfile;
         try {
-          localStorage.setItem('shreyas_uploaded_profile_photo', asyncProfile);
-          localStorage.setItem('shreyas_custom_avatar_img', asyncProfile);
+          localStorage.setItem('shreyas_uploaded_profile_photo_v2', asyncProfile);
         } catch(e) {}
       }
     });
@@ -2411,54 +2409,54 @@ html_template = '''<!DOCTYPE html>
         id: 1,
         title: 'Databricks Certified Machine Learning Engineer Associate',
         issuer: 'DATABRICKS',
-        // credId: 'CERT-DB-ML',
+        credId: 'CERT-DB-ML-2026',
         desc: 'Distributed Apache Spark compute, feature store management, MLflow model governance, and scalable production deployment on Databricks Lakehouse platform. (Oct 2026 – Oct 2028)',
-        image: null
+        image: './assets/certs/databricks-cert.svg'
       },
       {
         id: 2,
         title: 'Claude Certified Developer - Foundations',
         issuer: 'ANTHROPIC CLAUDE',
-        // credId: 'CERT-ANTH-01',
+        credId: 'CERT-ANTH-01-2026',
         desc: 'Multi-turn agentic workflows, chain-of-thought steering, structured XML parsing, and LLM-based application development. (Aug 2026 – Aug 2027)',
-        image: null
+        image: './assets/certs/claude-cert.svg'
       },
       {
         id: 3,
         title: 'Build With Gemini',
         issuer: 'GOOGLE CLOUD',
-        // credId: 'CERT-GCP-GEM',
+        credId: 'CERT-GCP-GEM-2026',
         desc: 'Hands-on experience developing AI-powered solutions using Google Gemini and generative AI capabilities, multimodal vision models, and Vertex AI. (Oct 2026)',
-        image: null
+        image: './assets/certs/gemini-cert.svg'
       },
       {
         id: 4,
         title: 'Introduction to Generative AI',
         issuer: 'NXT WAVE',
-        // credId: 'CERT-NXT-GENAI',
+        credId: 'NXTWAVE-GENAI-2024',
         desc: 'Fundamentals of Generative AI, building neural network models, deep learning foundations, and AI-generated content architectures. (Sep 2024)',
-        image: null
+        image: './assets/certs/nxtwave-cert.jpg'
       },
       {
         id: 5,
         title: 'Programming in Java',
         issuer: 'NPTEL',
-        // credId: 'CERT-NPTEL-JAVA',
+        credId: 'NPTEL-JAVA-2024',
         desc: 'Completed structured course covering core Java programming concepts, object-oriented principles, and algorithmic problem-solving. (Oct 2024)',
-        image: null
+        image: './assets/certs/nptel-cert.jpg'
       },
       {
         id: 6,
         title: 'Skill Enhancement Course',
         issuer: 'VTU Belgum',
-        // credId: 'CERT-TH-PYTHON',
+        credId: 'VTU-REACT-2025',
         desc: 'Learn to build intelligent, dynamic, and responsive web applications by integrating AI-powered features into React development. (Dec 2024 – May 2025)',
-        image: null
+        image: './assets/certs/react-vtu-cert.jpg'
       }
     ];
 
     function getCertificates() {
-      const stored = localStorage.getItem('shreyas_custom_certifications_v1');
+      const stored = localStorage.getItem('shreyas_custom_certifications_v2');
       if (stored) {
         try { return JSON.parse(stored); } catch (e) {}
       }
@@ -2466,7 +2464,7 @@ html_template = '''<!DOCTYPE html>
     }
 
     function saveCertificates(certs) {
-      localStorage.setItem('shreyas_custom_certifications_v1', JSON.stringify(certs));
+      localStorage.setItem('shreyas_custom_certifications_v2', JSON.stringify(certs));
     }
 
     let currentViewerCertId = null;
