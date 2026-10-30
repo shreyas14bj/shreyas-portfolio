@@ -437,11 +437,6 @@ html_template = '''<!DOCTYPE html>
           <i id="globalEditToggleIconMobile" data-lucide="lock" class="w-4 h-4"></i>
         </button>
 
-        <!-- Mobile Header Lock Button (Visible When Authorized) -->
-        <button id="headerLockBtnMobile" onclick="lockEditing()" class="hidden p-2 rounded-xl border border-red-500/40 bg-red-500/10 text-red-400" title="Lock Portfolio (Exit Edit Mode)">
-          <i data-lucide="lock" class="w-4 h-4"></i>
-        </button>
-
         <!-- Dark / Light Mode Toggle Button -->
         <button onclick="toggleThemeMode()" class="p-2 rounded-xl border transition-all" style="background-color: var(--card-bg-alt); border-color: var(--card-border);" title="Toggle Theme">
           <i id="themeIconMobile" data-lucide="sun" class="w-4 h-4 text-amber-400"></i>
@@ -473,12 +468,6 @@ html_template = '''<!DOCTYPE html>
       <button id="globalEditToggleBtnDesktop" onclick="handleTopEditOptionsClick()" class="px-3.5 py-1.5 rounded-xl border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 font-mono text-xs flex items-center space-x-1.5 transition-all shadow-sm" title="Edit Options (Password Protected)">
         <i id="globalEditToggleIconDesktop" data-lucide="lock" class="w-3.5 h-3.5"></i>
         <span id="globalEditToggleLabelDesktop" class="font-bold">EDIT OPTIONS</span>
-      </button>
-
-      <!-- Header Lock Button (Visible When Authorized) -->
-      <button id="headerLockBtnDesktop" onclick="lockEditing()" class="hidden px-3 py-1.5 rounded-xl border border-red-500/40 bg-red-500/10 hover:bg-red-500/20 text-red-400 font-mono text-xs flex items-center space-x-1.5 transition-all shadow-sm" title="Lock Portfolio (Exit Edit Mode)">
-        <i data-lucide="lock" class="w-3.5 h-3.5"></i>
-        <span class="font-bold">LOCK</span>
       </button>
 
       <!-- Theme Switcher -->
@@ -1827,6 +1816,12 @@ html_template = '''<!DOCTYPE html>
     // -------------------------------------------------------------------------
     var EDIT_PASSWORD = 'Shreyas@8618672044';
     var isEditAuthorized = false;
+    try {
+      if (sessionStorage.getItem('shreyas_portfolio_authorized') === 'true') {
+        isEditAuthorized = true;
+      }
+    } catch(e) {}
+
     var pendingAuthAction = null;
 
     function isAuthorized() {
@@ -4483,12 +4478,11 @@ html_template = '''<!DOCTYPE html>
 
     function handleTopEditOptionsClick() {
       if (isAuthorized()) {
-        openEditOptionsHubModal();
+        lockEditing();
       } else {
         requireAuth(() => {
-          openEditOptionsHubModal();
-          showToast('Portfolio editing unlocked. Edit Options Studio opened!');
-        }, 'Enter password to open Portfolio Edit Options Studio');
+          showToast('Portfolio editing unlocked! Edit options are now active across all sections.');
+        }, 'Enter password to unlock portfolio editing');
       }
     }
 
@@ -4923,7 +4917,18 @@ html_template = '''<!DOCTYPE html>
               <h3 class="text-lg sm:text-xl font-display font-bold" style="color: var(--text-main);">${exp.company}</h3>
               <p class="text-xs font-mono text-cyan-500 font-bold">${exp.role}</p>
             </div>
-            <span class="text-xs font-mono" style="color: var(--text-sub);">${exp.period} | ${exp.location}</span>
+            <div class="flex items-center space-x-2">
+              <span class="text-xs font-mono" style="color: var(--text-sub);">${exp.period} | ${exp.location}</span>
+              ${authed ? `
+                <button onclick="handleEditExperience('${exp.id}')" class="px-2 py-1 rounded-md border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-xs font-mono flex items-center space-x-1" title="Edit Role">
+                  <i data-lucide="edit-3" class="w-3 h-3"></i>
+                  <span>EDIT</span>
+                </button>
+                <button onclick="handleDeleteExperience('${exp.id}')" class="px-2 py-1 rounded-md border border-red-500/40 bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-mono flex items-center space-x-1" title="Delete Role">
+                  <i data-lucide="trash-2" class="w-3 h-3"></i>
+                </button>
+              ` : ''}
+            </div>
           </div>
           <p class="text-xs sm:text-sm leading-relaxed font-sans text-justify-pretty" style="color: var(--text-muted);">
             ${exp.summary}
@@ -5067,14 +5072,28 @@ html_template = '''<!DOCTYPE html>
               <h3 class="text-lg sm:text-xl font-display font-bold" style="color: var(--text-main);">${edu.institution}</h3>
               <p class="text-xs font-mono" style="color: var(--text-sub);">${edu.affiliation}</p>
             </div>
-            <div class="text-right">
-              <span class="px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-500 text-xs font-mono font-bold">${edu.score}</span>
-              <span class="text-[11px] font-mono block mt-1" style="color: var(--text-sub);">${edu.period}</span>
+            <div class="flex items-center space-x-2">
+              <div class="text-right">
+                <span class="px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-500 text-xs font-mono font-bold">${edu.score}</span>
+                <span class="text-[11px] font-mono block mt-1" style="color: var(--text-sub);">${edu.period}</span>
+              </div>
+              ${authed ? `
+                <button onclick="handleEditEducation('${edu.id}')" class="px-2 py-1 rounded-md border border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 text-xs font-mono flex items-center space-x-1" title="Edit Education">
+                  <i data-lucide="edit-3" class="w-3 h-3"></i>
+                  <span>EDIT</span>
+                </button>
+                <button onclick="handleDeleteEducation('${edu.id}')" class="px-2 py-1 rounded-md border border-red-500/40 bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-mono flex items-center space-x-1" title="Delete Education">
+                  <i data-lucide="trash-2" class="w-3 h-3"></i>
+                </button>
+              ` : ''}
             </div>
           </div>
-          <p class="text-xs sm:text-sm leading-relaxed font-sans text-justify-pretty" style="color: var(--text-muted);">
-            ${edu.summary}
-          </p>
+          <div class="space-y-1.5 font-sans">
+            <span class="text-xs font-mono block font-bold" style="color: var(--text-sub);">Relevant Coursework:</span>
+            <div class="flex flex-wrap gap-2 text-xs font-mono">
+              ${(edu.coursework || []).map(c => `<span class="px-2.5 py-1 rounded border text-cyan-400" style="background-color: var(--card-bg-alt); border-color: var(--card-border);">${c}</span>`).join('')}
+            </div>
+          </div>
         </div>
       `).join('');
 
@@ -5224,6 +5243,7 @@ html_template = '''<!DOCTYPE html>
 
       if (input === EDIT_PASSWORD) {
         isEditAuthorized = true;
+        try { sessionStorage.setItem('shreyas_portfolio_authorized', 'true'); } catch(e) {}
         closeAuthModal();
         showToast('Password verified. Editing unlocked for all sections!');
         updateAuthUI();
@@ -5245,6 +5265,9 @@ html_template = '''<!DOCTYPE html>
 
     function lockEditing() {
       isEditAuthorized = false;
+      try {
+        sessionStorage.removeItem('shreyas_portfolio_authorized');
+      } catch(e) {}
       closeEditOptionsHubModal();
       updateAuthUI();
       showToast('Portfolio editing locked. Viewer mode active.');
@@ -5259,23 +5282,18 @@ html_template = '''<!DOCTYPE html>
       const iconM = document.getElementById('globalEditToggleIconMobile');
       const btnM = document.getElementById('globalEditToggleBtnMobile');
 
-      const lockBtnD = document.getElementById('headerLockBtnDesktop');
-      const lockBtnM = document.getElementById('headerLockBtnMobile');
-
       if (authed) {
-        if (labelD) labelD.textContent = 'EDIT OPTIONS STUDIO';
-        if (iconD) iconD.setAttribute('data-lucide', 'sliders');
+        if (labelD) labelD.textContent = 'EXIT EDIT MODE';
+        if (iconD) iconD.setAttribute('data-lucide', 'unlock');
         if (btnD) {
           btnD.className = 'px-3.5 py-1.5 rounded-xl border border-emerald-500/50 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-mono text-xs flex items-center space-x-1.5 transition-all shadow-md';
-          btnD.title = 'Open Portfolio Edit Options Studio';
+          btnD.title = 'Exit Edit Mode (Lock Portfolio)';
         }
-        if (iconM) iconM.setAttribute('data-lucide', 'sliders');
+        if (iconM) iconM.setAttribute('data-lucide', 'unlock');
         if (btnM) {
           btnM.className = 'p-2 rounded-xl border border-emerald-500/50 bg-emerald-500/20 text-emerald-300';
-          btnM.title = 'Open Portfolio Edit Options Studio';
+          btnM.title = 'Exit Edit Mode (Lock Portfolio)';
         }
-        if (lockBtnD) lockBtnD.classList.remove('hidden');
-        if (lockBtnM) lockBtnM.classList.remove('hidden');
       } else {
         if (labelD) labelD.textContent = 'EDIT OPTIONS';
         if (iconD) iconD.setAttribute('data-lucide', 'lock');
@@ -5288,8 +5306,6 @@ html_template = '''<!DOCTYPE html>
           btnM.className = 'p-2 rounded-xl border border-amber-500/40 bg-amber-500/10 text-amber-400';
           btnM.title = 'Edit Options (Password Protected)';
         }
-        if (lockBtnD) lockBtnD.classList.add('hidden');
-        if (lockBtnM) lockBtnM.classList.add('hidden');
       }
 
       const containers = [
@@ -5298,7 +5314,11 @@ html_template = '''<!DOCTYPE html>
         'profilePhotoBtnContainer',
         'addCertBtnContainer',
         'addProjectBtnContainer',
-        'addDrawingsBtnContainer'
+        'addDrawingsBtnContainer',
+        'editHeroBtnContainer',
+        'editAboutBtnContainer',
+        'addExperienceBtnContainer',
+        'addEducationBtnContainer'
       ];
 
       containers.forEach(id => {
