@@ -917,20 +917,10 @@ html_template = '''<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- 5-Row Horizontal Slider Container -->
-      <div class="relative w-full group/slider">
-        <!-- Floating Left Arrow for gallery navigation -->
-        <button onclick="slideSketches(-1)" class="hidden md:flex absolute -left-4 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full items-center justify-center bg-black/80 hover:bg-black border border-white/20 text-white shadow-2xl backdrop-blur-md transition-all hover:scale-110 opacity-0 group-hover/slider:opacity-100" title="Slide Left">
-          <i data-lucide="chevron-left" class="w-5 h-5"></i>
-        </button>
-
-        <!-- Floating Right Arrow for gallery navigation -->
-        <button onclick="slideSketches(1)" class="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full items-center justify-center bg-black/80 hover:bg-black border border-white/20 text-white shadow-2xl backdrop-blur-md transition-all hover:scale-110 opacity-0 group-hover/slider:opacity-100" title="Slide Right">
-          <i data-lucide="chevron-right" class="w-5 h-5"></i>
-        </button>
-
-        <!-- Feed Container: Horizontal Row-by-Row Track (up to 5 rows) -->
-        <div id="postsFeedContainer" class="flex flex-col gap-4 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-2 px-1">
+      <!-- Drawing Studio Slider Container: Independent Sliders for Each Row -->
+      <div class="relative w-full">
+        <!-- Feed Container: Injects each independent row slider with its own controls -->
+        <div id="postsFeedContainer" class="flex flex-col gap-5 py-2 px-1 w-full">
           <!-- Horizontal rows injected via JavaScript -->
         </div>
       </div>
@@ -2392,6 +2382,7 @@ html_template = '''<!DOCTYPE html>
     (function sanitizeObsoleteStorage() {
       try {
         const obsoleteKeys = [
+          'shreyas_drawing_feed_v12',
           'shreyas_drawing_feed_v11',
           'shreyas_drawing_feed_v10',
           'shreyas_drawing_feed_v9',
@@ -3539,13 +3530,23 @@ html_template = '''<!DOCTYPE html>
     // -------------------------------------------------------------------------
     // 6. OBSERVATIONAL SKETCH STUDIO (HIGH-CAPACITY INDEXEDDB + CANVAS COMPRESSION)
     // -------------------------------------------------------------------------
-    const DRAWINGS_KEY = 'shreyas_drawing_feed_v12';
-    const ART_DB_NAME = 'ShreyasArtStudioDB_v12';
+    const DRAWINGS_KEY = 'shreyas_drawing_feed_v13';
+    const ART_DB_NAME = 'ShreyasArtStudioDB_v13';
     const ART_DB_STORE = 'sketchbook';
     let cachedDrawings = null;
     let draftDrawings = [];
 
     const DEFAULT_DRAWINGS = [
+      {
+        "id": "art_ganesha_throne_elephants",
+        "title": "Lord Ganesha - Sacred Throne & Elephants",
+        "medium": "Intricate Graphite & Charcoal Drawing",
+        "caption": "Majestic seated Lord Ganesha with ornate prabhavali crown, surrounded by four divine elephants. Master observational study signed by Shreyas B J.",
+        "image": "./assets/drawings/ganesha-throne-elephants.jpeg",
+        "date": "Oct 2026",
+        "likes": 0,
+        "isLiked": false
+      },
       {
         "id": "art_ganesha_radiance",
         "title": "Lord Ganesha - Sacred Radiance",
@@ -4000,7 +4001,7 @@ html_template = '''<!DOCTYPE html>
       DEFAULT_DRAWINGS.forEach(d => defaultMap.set(d.id, d.image));
 
       const keys = [
-        'shreyas_drawing_feed_v12',
+        'shreyas_drawing_feed_v13',
         'shreyas_drawing_feed_v10',
         'shreyas_drawing_feed_v9'
       ];
@@ -4021,7 +4022,7 @@ html_template = '''<!DOCTYPE html>
                 return p;
               });
               if (changed) {
-                try { localStorage.setItem('shreyas_drawing_feed_v12', JSON.stringify(parsed)); } catch(e) {}
+                try { localStorage.setItem('shreyas_drawing_feed_v13', JSON.stringify(parsed)); } catch(e) {}
               }
               cachedDrawings = parsed;
               return cachedDrawings;
@@ -4231,13 +4232,25 @@ html_template = '''<!DOCTYPE html>
     }
 
     function slideSketches(direction) {
-      const container = document.getElementById('postsFeedContainer');
-      if (!container) return;
-      const columnStep = 310;
-      container.scrollBy({
-        left: direction * columnStep,
-        behavior: 'smooth'
-      });
+      const tracks = document.querySelectorAll('[id^="sketchRowTrack-"]');
+      if (tracks && tracks.length > 0) {
+        tracks.forEach(track => {
+          track.scrollBy({
+            left: direction * 295,
+            behavior: 'smooth'
+          });
+        });
+      }
+    }
+
+    function slideRow(rowIdx, direction) {
+      const track = document.getElementById('sketchRowTrack-' + rowIdx);
+      if (track) {
+        track.scrollBy({
+          left: direction * 295,
+          behavior: 'smooth'
+        });
+      }
     }
 
     function renderDrawings() {
@@ -4339,8 +4352,21 @@ html_template = '''<!DOCTYPE html>
 
       if (container) {
         container.innerHTML = rows.map((rowDrawings, rIdx) => `
-          <div class="flex gap-4 min-w-max items-center" id="sketchRow-${rIdx}">
-            ${rowDrawings.map(renderCard).join('')}
+          <div class="relative w-full group/row my-1" id="sketchRowWrapper-${rIdx}">
+            <!-- Left Slider Arrow Button for this row -->
+            <button onclick="slideRow(${rIdx}, -1)" class="absolute -left-2 sm:-left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center bg-black/85 hover:bg-black border border-amber-500/50 hover:border-amber-400 text-amber-400 hover:text-amber-300 shadow-2xl backdrop-blur-md transition-all hover:scale-110 opacity-90 sm:opacity-0 sm:group-hover/row:opacity-100 focus:opacity-100 cursor-pointer" title="Slide Row Left" aria-label="Slide Left">
+              <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Horizontal Scroll Track for this specific row -->
+            <div id="sketchRowTrack-${rIdx}" class="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-2 px-2 sm:px-6">
+              ${rowDrawings.map(renderCard).join('')}
+            </div>
+
+            <!-- Right Slider Arrow Button for this row -->
+            <button onclick="slideRow(${rIdx}, 1)" class="absolute -right-2 sm:-right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center bg-black/85 hover:bg-black border border-amber-500/50 hover:border-amber-400 text-amber-400 hover:text-amber-300 shadow-2xl backdrop-blur-md transition-all hover:scale-110 opacity-90 sm:opacity-0 sm:group-hover/row:opacity-100 focus:opacity-100 cursor-pointer" title="Slide Row Right" aria-label="Slide Right">
+              <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </button>
           </div>
         `).join('');
       }
@@ -4439,8 +4465,8 @@ html_template = '''<!DOCTYPE html>
       if (container) container.classList.add('hidden');
 
       // Smooth scroll gallery track to beginning so the user sees the new drawings immediately
-      const feed = document.getElementById('postsFeedContainer');
-      if (feed) feed.scrollTo({ left: 0, behavior: 'smooth' });
+      const firstTrack = document.getElementById('sketchRowTrack-0') || document.getElementById('postsFeedContainer');
+      if (firstTrack) firstTrack.scrollTo({ left: 0, behavior: 'smooth' });
     }
 
     function deleteDrawing(id) {
