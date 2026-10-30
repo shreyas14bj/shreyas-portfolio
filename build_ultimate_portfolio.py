@@ -427,6 +427,79 @@ html_template = '''<!DOCTYPE html>
       display: flex !important;
     }
 
+    /* Bulletproof Security Verification Card Modal (Zero CDN Dependency) */
+    .auth-card {
+      width: 100% !important;
+      max-width: 440px !important;
+      background-color: #0d111d !important;
+      border: 1px solid rgba(212, 175, 55, 0.45) !important;
+      border-radius: 1.25rem !important;
+      padding: 1.75rem !important;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 240, 255, 0.25) !important;
+      color: #f8fafc !important;
+      box-sizing: border-box !important;
+      position: relative !important;
+      margin: auto !important;
+    }
+
+    #authPasswordInput {
+      width: 100% !important;
+      background-color: #131a2b !important;
+      border: 1px solid rgba(212, 175, 55, 0.35) !important;
+      color: #f8fafc !important;
+      border-radius: 0.75rem !important;
+      padding: 0.75rem 2.75rem 0.75rem 1rem !important;
+      font-family: 'JetBrains Mono', monospace !important;
+      font-size: 0.9rem !important;
+      letter-spacing: 0.05em !important;
+      box-sizing: border-box !important;
+      outline: none !important;
+    }
+    #authPasswordInput:focus {
+      border-color: #00f0ff !important;
+      box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.3) !important;
+    }
+
+    .auth-verify-btn {
+      width: 50% !important;
+      padding: 0.75rem 1rem !important;
+      border-radius: 0.75rem !important;
+      background: linear-gradient(135deg, #00f0ff, #0284c7) !important;
+      color: #07090e !important;
+      font-weight: 700 !important;
+      font-size: 0.75rem !important;
+      letter-spacing: 0.05em !important;
+      text-transform: uppercase !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 0.35rem !important;
+      cursor: pointer !important;
+      border: none !important;
+      box-shadow: 0 4px 14px rgba(0, 240, 255, 0.3) !important;
+      transition: all 0.2s ease !important;
+    }
+    .auth-verify-btn:hover {
+      background: linear-gradient(135deg, #38bdf8, #0ea5e9) !important;
+      transform: translateY(-1px) !important;
+    }
+    .auth-cancel-btn {
+      width: 50% !important;
+      padding: 0.75rem 1rem !important;
+      border-radius: 0.75rem !important;
+      background-color: transparent !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      color: #94a3b8 !important;
+      font-weight: 700 !important;
+      font-size: 0.75rem !important;
+      cursor: pointer !important;
+      transition: all 0.2s ease !important;
+    }
+    .auth-cancel-btn:hover {
+      border-color: rgba(255, 255, 255, 0.5) !important;
+      color: #ffffff !important;
+    }
+
   </style>
 </head>
 <body class="selection:bg-cyan-500/25 selection:text-cyan-400 relative min-h-screen">
@@ -1719,52 +1792,50 @@ html_template = '''<!DOCTYPE html>
   </div>
 
   <!-- ========================================================================= -->
-  <!-- MODAL: SECURITY VERIFICATION (PASSWORD PROTECTED: Shreyas@8618672044) -->
+  <!-- MODAL: SECURITY VERIFICATION CARD (PASSWORD PROTECTED: Shreyas@8618672044) -->
   <!-- ========================================================================= -->
-  <div id="authModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
-    <div class="interactive-card max-w-md w-full p-6 sm:p-7 space-y-4 relative">
-      <div class="flex items-center justify-between border-b pb-3" style="border-color: var(--card-border);">
+  <div id="authModal" onclick="handleAuthModalBackdropClick(event)" class="fixed inset-0 z-[999999] bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="auth-card space-y-4" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between border-b pb-3" style="border-color: rgba(255, 255, 255, 0.1);">
         <div class="flex items-center space-x-2.5">
-          <div class="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+          <div class="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/25">
             <i data-lucide="lock" class="w-5 h-5"></i>
           </div>
           <div>
-            <h3 class="text-base font-display font-bold" style="color: var(--text-main);">Security Verification</h3>
-            <p id="authModalPromptText" class="text-[11px] font-mono" style="color: var(--text-sub);">Enter password to edit portfolio content</p>
+            <h3 class="text-base font-display font-bold text-white">Security Verification</h3>
+            <p id="authModalPromptText" class="text-[11px] font-mono text-gray-400">Enter password to edit portfolio content</p>
           </div>
         </div>
-        <button onclick="closeAuthModal()" class="p-1.5 text-gray-400 hover:text-white transition-colors">
+        <button type="button" onclick="closeAuthModal()" class="p-1.5 text-gray-400 hover:text-white transition-colors" title="Close (Cancel)">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
       <form id="authLoginForm" onsubmit="handleAuthSubmit(event)" class="space-y-4 font-mono text-xs">
-        <p class="text-xs font-sans text-justify-pretty" style="color: var(--text-muted);">
-          Modifying portfolio content, publishing drawings, adding projects or certifications, and managing transmissions require password verification.
+        <p class="text-xs font-sans text-gray-300 leading-relaxed text-justify-pretty">
+          Modifying portfolio content, publishing drawings, adding projects or certifications, and managing transmissions require authorization.
         </p>
 
         <div>
-          <label class="block mb-1 font-bold" style="color: var(--text-sub);">ENTER PASSWORD</label>
+          <label class="block mb-1.5 font-bold text-gray-300">ENTER PASSWORD</label>
           <div class="relative">
-            <input type="password" id="authPasswordInput" placeholder="Enter password to edit" required
-                   class="w-full border rounded-xl px-3.5 py-2.5 pr-10 font-mono text-sm tracking-wider" 
-                   style="background-color: var(--card-bg-alt); border-color: var(--input-border); color: var(--text-main);">
-            <button type="button" onclick="toggleAuthPasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white">
+            <input type="password" id="authPasswordInput" placeholder="Enter password to edit" required autocomplete="current-password">
+            <button type="button" onclick="toggleAuthPasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white p-1">
               <i id="authPassEyeIcon" data-lucide="eye" class="w-4 h-4"></i>
             </button>
           </div>
         </div>
 
-        <div id="authErrorMsg" class="hidden p-2.5 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-xs flex items-center space-x-1.5">
+        <div id="authErrorMsg" class="hidden p-2.5 rounded-lg bg-red-500/15 border border-red-500/40 text-red-400 text-xs flex items-center space-x-1.5">
           <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
           <span>Incorrect password. Access denied.</span>
         </div>
 
-        <div class="flex items-center space-x-2 pt-2">
-          <button type="button" onclick="closeAuthModal()" class="w-1/2 py-2.5 rounded-xl border text-xs font-bold" style="border-color: var(--card-border); color: var(--text-sub);">
+        <div class="flex items-center space-x-2.5 pt-2">
+          <button type="button" onclick="closeAuthModal()" class="auth-cancel-btn">
             Cancel
           </button>
-          <button type="submit" class="w-1/2 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-white dark:text-noir-950 text-xs font-bold uppercase tracking-wider flex items-center justify-center space-x-1.5 shadow-md">
+          <button type="submit" class="auth-verify-btn">
             <i data-lucide="check" class="w-3.5 h-3.5"></i>
             <span>Verify &amp; Edit</span>
           </button>
@@ -1914,32 +1985,8 @@ html_template = '''<!DOCTYPE html>
       if (isAuthorized()) {
         if (typeof actionFn === 'function') actionFn();
       } else {
-        var inIframe = false;
-        try { inIframe = window.self !== window.top; } catch(e) { inIframe = true; }
-        if (inIframe) {
-          pendingAuthAction = actionFn;
-          openAuthModal(promptMsg);
-          return;
-        }
-
-        let pass = null;
-        try {
-          pass = window.prompt(promptMsg || "Security Authorization Required:\\nEnter password to unlock portfolio editing:");
-        } catch(e) {
-          pendingAuthAction = actionFn;
-          openAuthModal(promptMsg);
-          return;
-        }
-        if (pass === null) return;
-        if (pass.trim() === EDIT_PASSWORD) {
-          isEditAuthorized = true;
-          try { sessionStorage.setItem('shreyas_portfolio_authorized', 'true'); } catch(e) {}
-          updateAuthUI();
-          showToast('Password verified! Editing unlocked.');
-          if (typeof actionFn === 'function') actionFn();
-        } else {
-          alert('Incorrect password. Access denied.');
-        }
+        pendingAuthAction = actionFn;
+        openAuthModal(promptMsg || 'Enter password to access edit options for all sections');
       }
     }
 
@@ -4573,42 +4620,16 @@ html_template = '''<!DOCTYPE html>
       sessionStorage.removeItem('shreyas_portfolio_edit_authorized');
     } catch(e) {}
 
-    function handleTopEditOptionsClick() {
+    function handleTopEditOptionsClick(e) {
+      if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+      if (e && typeof e.preventDefault === 'function') e.preventDefault();
+
       if (isAuthorized()) {
         lockEditing();
         return;
       }
 
-      var inIframe = false;
-      try { inIframe = window.self !== window.top; } catch(e) { inIframe = true; }
-      if (inIframe) {
-        openAuthModal("Enter password to unlock portfolio editing");
-        return;
-      }
-
-      let enteredPassword = null;
-      try {
-        enteredPassword = window.prompt("Security Authorization Required:\\nEnter password to unlock portfolio editing:");
-      } catch (err) {
-        openAuthModal("Enter password to unlock portfolio editing");
-        return;
-      }
-
-      if (enteredPassword === null) {
-        // User clicked cancel
-        return;
-      }
-
-      if (enteredPassword.trim() === EDIT_PASSWORD) {
-        isEditAuthorized = true;
-        try {
-          sessionStorage.setItem('shreyas_portfolio_authorized', 'true');
-        } catch(e) {}
-        updateAuthUI();
-        showToast('Password verified! All edit options are now active across all sections.');
-      } else {
-        alert('Incorrect password. Access denied.');
-      }
+      openAuthModal("Enter password to unlock portfolio editing");
     }
 
         
@@ -5335,13 +5356,16 @@ html_template = '''<!DOCTYPE html>
       if (input) {
         input.value = '';
         input.classList.remove('border-red-500');
-        setTimeout(() => input.focus(), 80);
       }
 
       if (modal) {
+        modal.dataset.openedAt = String(Date.now());
         modal.style.display = 'flex';
         modal.classList.remove('hidden');
       }
+      setTimeout(() => {
+        if (input) input.focus();
+      }, 100);
       safeCreateIcons();
     }
 
@@ -5352,6 +5376,14 @@ html_template = '''<!DOCTYPE html>
         modal.classList.add('hidden');
       }
       pendingAuthAction = null;
+    }
+
+    function handleAuthModalBackdropClick(e) {
+      if (e.target && e.target.id === 'authModal') {
+        const modal = e.currentTarget || e.target;
+        if (Date.now() - Number(modal.dataset.openedAt || 0) < 350) return;
+        closeAuthModal();
+      }
     }
 
     function toggleAuthPasswordVisibility() {
@@ -5369,14 +5401,16 @@ html_template = '''<!DOCTYPE html>
     }
 
     function handleAuthSubmit(e) {
-      e.preventDefault();
-      const input = document.getElementById('authPasswordInput').value;
+      if (e && typeof e.preventDefault === 'function') e.preventDefault();
+      const inputEl = document.getElementById('authPasswordInput');
+      const input = inputEl ? inputEl.value : '';
 
-      if (input === EDIT_PASSWORD) {
+      if (input.trim() === EDIT_PASSWORD) {
         isEditAuthorized = true;
         try { sessionStorage.setItem('shreyas_portfolio_authorized', 'true'); } catch(e) {}
+        try { localStorage.setItem('shreyas_portfolio_authorized', 'true'); } catch(e) {}
         closeAuthModal();
-        showToast('Password verified. Editing unlocked for all sections!');
+        showToast('Password verified! All edit options are now active across all sections.');
         updateAuthUI();
         if (typeof pendingAuthAction === 'function') {
           const act = pendingAuthAction;
@@ -5386,7 +5420,6 @@ html_template = '''<!DOCTYPE html>
       } else {
         const err = document.getElementById('authErrorMsg');
         if (err) err.classList.remove('hidden');
-        const inputEl = document.getElementById('authPasswordInput');
         if (inputEl) {
           inputEl.classList.add('border-red-500');
           inputEl.focus();
@@ -5475,6 +5508,10 @@ html_template = '''<!DOCTYPE html>
     
     // Global bindings for seamless cross-browser event handling
     window.handleTopEditOptionsClick = handleTopEditOptionsClick;
+    window.openAuthModal = openAuthModal;
+    window.closeAuthModal = closeAuthModal;
+    window.handleAuthModalBackdropClick = handleAuthModalBackdropClick;
+    window.handleAuthSubmit = handleAuthSubmit;
     window.isAuthorized = isAuthorized;
     window.lockEditing = lockEditing;
     window.requireAuth = requireAuth;

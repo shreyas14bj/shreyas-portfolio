@@ -11,51 +11,42 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Custom CSS to hide default Streamlit chrome (header, hamburger menu, footer, status widget)
-# and stretch the embedded portfolio iframe across 100% of the viewport seamlessly
+# Custom CSS to hide Streamlit chrome and allow full-viewport edge-to-edge layout
 st.markdown("""
 <style>
-    /* Hide Streamlit Header, Menu, Footer, and Status Indicators */
-    header[data-testid="stHeader"] {
-        display: none !important;
-    }
-    footer {
-        display: none !important;
-    }
-    #MainMenu {
-        display: none !important;
-    }
-    div[data-testid="stToolbar"] {
-        display: none !important;
-    }
-    div[data-testid="stDecoration"] {
-        display: none !important;
-    }
-    div[data-testid="stStatusWidget"] {
-        display: none !important;
-    }
+    /* Hide default Streamlit chrome */
+    header[data-testid="stHeader"] { display: none !important; }
+    footer { display: none !important; }
+    #MainMenu { display: none !important; }
+    div[data-testid="stToolbar"] { display: none !important; }
+    div[data-testid="stDecoration"] { display: none !important; }
+    div[data-testid="stStatusWidget"] { display: none !important; }
     
-    /* Remove default container padding so the layout extends edge-to-edge */
-    .main .block-container {
+    /* Remove padding and margins so the page goes edge-to-edge */
+    .stApp {
+        margin: 0 !important;
+        padding: 0 !important;
+        background-color: #07090E !important;
+    }
+    .main {
         padding: 0 !important;
         margin: 0 !important;
-        max-width: 100vw !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        overflow: hidden !important;
     }
-    
-    /* Fixed full-screen iframe styling */
-    iframe {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100vw !important;
+    .block-container {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    div[data-testid="stCustomComponentV1"] {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    div[data-testid="stCustomComponentV1"] iframe {
+        width: 100% !important;
         height: 100vh !important;
         border: none !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        z-index: 99999 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -72,7 +63,7 @@ if not os.path.exists(html_path):
 with open(html_path, "r", encoding="utf-8") as f:
     html_content = f.read()
 
-# Inline profile photo as Base64 Data URL to guarantee zero 404s inside the iframe
+# Inline profile photo as Base64 Data URL to guarantee zero 404s inside Streamlit
 if os.path.exists(photo_path):
     with open(photo_path, "rb") as img_file:
         photo_b64 = base64.b64encode(img_file.read()).decode("utf-8")
@@ -80,4 +71,4 @@ if os.path.exists(photo_path):
         html_content = html_content.replace("./assets/shreyas-photo.png", photo_data_url)
 
 # Render the self-contained cinematic portfolio with scrolling enabled
-components.html(html_content, height=1200, scrolling=True)
+components.html(html_content, height=1000, scrolling=True)
