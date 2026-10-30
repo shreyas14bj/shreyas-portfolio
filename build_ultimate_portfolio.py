@@ -69,12 +69,12 @@ html_template = '''<!DOCTYPE html>
           "Fine-Art Observational Sketching"
         ],
         "sameAs": [
-          "https://linkedin.com/in/shreyas-b-j-975988226",
-          "https://github.com/shreyasbj03",
-          "https://share.streamlit.io",
-          "https://instagram.com"
+          "http://www.linkedin.com/in/shreyas-b-j-58710a24b",
+          "https://github.com/shreyas14bj",
+          "https://share.streamlit.io/",
+          "https://www.instagram.com/arts_of_antharala?srtk=aWRkb3BqemFmcmQz"
         ],
-        "email": "mailto:shreyasbj03@gmail.com",
+        "email": "mailto:shreyasbjckm@gmail.com",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Bangalore",
@@ -637,7 +637,7 @@ html_template = '''<!DOCTYPE html>
 
       <!-- Subtitle (Justified) -->
       <p class="text-base sm:text-lg max-w-3xl mx-auto leading-relaxed font-sans text-justify-pretty" style="color: var(--text-muted);">
-        I am <strong style="color: var(--text-main);">Shreyas B J</strong>, an AI/ML Engineer merging deep learning workflows with forensic hardware reliability and fine-art draughtsmanship. Graduated with an 8.89 CGPA in Electronics &amp; Communication from NCET Bangalore, with industrial failure analysis experience at Foxconn.
+        I am <strong style="color: var(--text-main);">Shreyas B J</strong>, an Assistant System Engineer Trainee in AIML unit. Graduated with an 8.89 CGPA in Electronics &amp; Communication Engineering from NCET Bangalore.
       </p>
 
       <!-- ===================================================================== -->
@@ -646,7 +646,7 @@ html_template = '''<!DOCTYPE html>
       <div class="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
         
         <!-- 1. LinkedIn -->
-        <a href="https://linkedin.com/in/shreyas-b-j-975988226" target="_blank" rel="noopener noreferrer" class="interactive-card px-4 py-2.5 flex items-center space-x-2 group hover:border-[#0A66C2] transition-colors" title="Visit Shreyas on LinkedIn">
+        <a href="http://www.linkedin.com/in/shreyas-b-j-58710a24b" target="_blank" rel="noopener noreferrer" class="interactive-card px-4 py-2.5 flex items-center space-x-2 group hover:border-[#0A66C2] transition-colors" title="Visit Shreyas on LinkedIn">
           <svg class="w-4 h-4 fill-[#0A66C2]" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 0 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.4 9.74V9.92H5.06v8.58z"/></svg>
           <span class="text-xs font-mono font-bold" style="color: var(--text-main);">LinkedIn</span>
         </a>
@@ -658,7 +658,7 @@ html_template = '''<!DOCTYPE html>
         </a>
 
         <!-- 3. Netlify -->
-        <a href="https://app.netlify.com" target="_blank" rel="noopener noreferrer" class="interactive-card px-4 py-2.5 flex items-center space-x-2 group hover:border-[#00C7B7] transition-colors" title="Visit Shreyas on Netlify">
+        <a href="https://app.netlify.com/teams/shreyasbjckm/projects" target="_blank" rel="noopener noreferrer" class="interactive-card px-4 py-2.5 flex items-center space-x-2 group hover:border-[#00C7B7] transition-colors" title="Visit Shreyas on Netlify">
           <svg class="w-4 h-4 fill-[#00C7B7]" viewBox="0 0 24 24"><path d="M17.06 13.09l-3.05-3.04a.42.42 0 0 0-.59 0l-1.33 1.33-2.09-2.09a.42.42 0 0 0-.59 0L7.04 11.66a.42.42 0 0 0 0 .59l3.05 3.04a.42.42 0 0 0 .59 0l1.33-1.33 2.09 2.09c.16.16.43.16.59 0l2.37-2.37a.42.42 0 0 0 0-.59zM12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/></svg>
           <span class="text-xs font-mono font-bold" style="color: var(--text-main);">Netlify</span>
         </a>
@@ -670,7 +670,7 @@ html_template = '''<!DOCTYPE html>
         </a>
 
         <!-- 5. Instagram -->
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="interactive-card px-4 py-2.5 flex items-center space-x-2 group hover:border-[#E4405F] transition-colors" title="Visit Shreyas on Instagram">
+        <a href="https://www.instagram.com/arts_of_antharala?srtk=aWRkb3BqemFmcmQz" target="_blank" rel="noopener noreferrer" class="interactive-card px-4 py-2.5 flex items-center space-x-2 group hover:border-[#E4405F] transition-colors" title="Visit Shreyas on Instagram">
           <svg class="w-4 h-4 fill-[#E4405F]" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
           <span class="text-xs font-mono font-bold" style="color: var(--text-main);">Instagram</span>
         </a>
@@ -842,7 +842,7 @@ html_template = '''<!DOCTYPE html>
         <div class="space-y-1">
           <span class="text-xs font-mono text-cyan-500 font-bold uppercase tracking-wider">ACCREDITATIONS &bull; SKILLS</span>
           <h2 class="text-2xl sm:text-4xl font-display font-bold tracking-tight" style="color: var(--text-main);">Verified Certifications</h2>
-          <p class="text-xs font-mono" style="color: var(--text-sub);">All certifications feature verified seals and image placeholders with upload capabilities.</p>
+          <p class="text-xs font-mono" style="color: var(--text-sub);">All certifications feature verified seals.</p>
         </div>
         <div id="addCertBtnContainer" class="hidden self-start sm:self-auto">
           <button onclick="openAddCertModal()" class="px-3.5 py-2 rounded-xl border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 font-mono text-xs flex items-center space-x-1.5 transition-all shadow-sm">
@@ -867,7 +867,7 @@ html_template = '''<!DOCTYPE html>
         <div class="space-y-1">
           <span class="text-xs font-mono text-cyan-500 font-bold uppercase tracking-wider">PROJECTS &bull; IMPLEMENTATIONS</span>
           <h2 class="text-2xl sm:text-4xl font-display font-bold tracking-tight" style="color: var(--text-main);">Technical Portfolio Projects</h2>
-          <p class="text-xs font-mono" style="color: var(--text-sub);">Four flagship creations with dedicated custom visual simulations.</p>
+          <p class="text-xs font-mono" style="color: var(--text-sub);">Flagship creations with dedicated custom visual simulations.</p>
         </div>
         <div id="addProjectBtnContainer" class="hidden self-start sm:self-auto">
           <button onclick="openAddProjectModal()" class="px-3.5 py-2 rounded-xl border border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 font-mono text-xs flex items-center space-x-1.5 transition-all shadow-sm">
@@ -891,8 +891,8 @@ html_template = '''<!DOCTYPE html>
       <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div class="space-y-1">
           <span class="text-xs font-mono text-amber-500 font-bold uppercase tracking-wider">FINE ART &bull; OBSERVATIONAL SKETCHBOOK</span>
-          <h2 class="text-2xl sm:text-4xl font-display font-bold tracking-tight" style="color: var(--text-main);">Observational Sketch Studio</h2>
-          <p class="text-xs font-mono" style="color: var(--text-sub);">Hand-drawn studies in a 5-row horizontal sliding gallery. Slide left or right to explore.</p>
+          <h2 class="text-2xl sm:text-4xl font-display font-bold tracking-tight" style="color: var(--text-main);">ARTS OF ANTHARALA - ART STUDIO</h2>
+          <p class="text-xs font-mono" style="color: var(--text-sub);">Hand-drawn studies in a sliding gallery. Slide left or right to explore.</p>
         </div>
 
         <!-- Controls: Left / Right Navigation & Add Drawings -->
@@ -981,9 +981,9 @@ html_template = '''<!DOCTYPE html>
               <div class="flex items-center justify-between p-3.5 rounded-xl border" style="background-color: var(--card-bg-alt); border-color: var(--card-border);">
                 <div class="flex items-center space-x-2.5" style="color: var(--text-muted);">
                   <i data-lucide="mail" class="w-4 h-4 text-cyan-500"></i>
-                  <span class="select-all">shreyasbj03@gmail.com</span>
+                  <span class="select-all">shreyasbjckm@gmail.com</span>
                 </div>
-                <button onclick="copyToClipboard('shreyasbj03@gmail.com', 'Email copied to clipboard!')" class="text-cyan-500 hover:underline text-[11px] font-bold">COPY</button>
+                <button onclick="copyToClipboard('shreyasbjckm@gmail.com', 'Email copied to clipboard!')" class="text-cyan-500 hover:underline text-[11px] font-bold">COPY</button>
               </div>
 
               <div class="flex items-center justify-between p-3.5 rounded-xl border" style="background-color: var(--card-bg-alt); border-color: var(--card-border);">
@@ -1008,19 +1008,19 @@ html_template = '''<!DOCTYPE html>
           <div class="pt-4 border-t space-y-2" style="border-color: var(--card-border);">
             <span class="text-xs font-mono block" style="color: var(--text-sub);">CLICKABLE PLATFORM LOGOS:</span>
             <div class="flex items-center space-x-3">
-              <a href="https://linkedin.com/in/shreyas-b-j-975988226" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl border hover:border-[#0A66C2] transition-colors" style="background-color: var(--card-bg-alt); border-color: var(--card-border);" title="LinkedIn">
+              <a href="http://www.linkedin.com/in/shreyas-b-j-58710a24b" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl border hover:border-[#0A66C2] transition-colors" style="background-color: var(--card-bg-alt); border-color: var(--card-border);" title="LinkedIn">
                 <svg class="w-4 h-4 fill-[#0A66C2]" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 0 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.4 9.74V9.92H5.06v8.58z"/></svg>
               </a>
-              <a href="https://github.com/shreyasbj03" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl border hover:border-gray-400 transition-colors" style="background-color: var(--card-bg-alt); border-color: var(--card-border);" title="GitHub">
+              <a href="https://github.com/shreyas14bj" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl border hover:border-gray-400 transition-colors" style="background-color: var(--card-bg-alt); border-color: var(--card-border);" title="GitHub">
                 <svg class="w-4 h-4 fill-current" style="color: var(--text-main);" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
               </a>
-              <a href="https://app.netlify.com" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl border hover:border-[#00C7B7] transition-colors" style="background-color: var(--card-bg-alt); border-color: var(--card-border);" title="Netlify">
+              <a href="https://app.netlify.com/teams/shreyasbjckm/projects" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl border hover:border-[#00C7B7] transition-colors" style="background-color: var(--card-bg-alt); border-color: var(--card-border);" title="Netlify">
                 <svg class="w-4 h-4 fill-[#00C7B7]" viewBox="0 0 24 24"><path d="M17.06 13.09l-3.05-3.04a.42.42 0 0 0-.59 0l-1.33 1.33-2.09-2.09a.42.42 0 0 0-.59 0L7.04 11.66a.42.42 0 0 0 0 .59l3.05 3.04a.42.42 0 0 0 .59 0l1.33-1.33 2.09 2.09c.16.16.43.16.59 0l2.37-2.37a.42.42 0 0 0 0-.59zM12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/></svg>
               </a>
               <a href="https://share.streamlit.io" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl border hover:border-[#FF4B4B] transition-colors" style="background-color: var(--card-bg-alt); border-color: var(--card-border);" title="Streamlit">
                 <svg class="w-4 h-4 fill-[#FF4B4B]" viewBox="0 0 24 24"><path d="M12 2.5l9.5 16.5H2.5L12 2.5zm0 4.2L5.8 17.5h12.4L12 6.7z"/></svg>
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl border hover:border-[#E4405F] transition-colors" style="background-color: var(--card-bg-alt); border-color: var(--card-border);" title="Instagram">
+              <a href="https://www.instagram.com/arts_of_antharala?srtk=aWRkb3BqemFmcmQz" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl border hover:border-[#E4405F] transition-colors" style="background-color: var(--card-bg-alt); border-color: var(--card-border);" title="Instagram">
                 <svg class="w-4 h-4 fill-[#E4405F]" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
               </a>
             </div>
@@ -1058,7 +1058,7 @@ html_template = '''<!DOCTYPE html>
     <!-- FOOTER -->
     <!-- ======================================================================= -->
     <footer class="py-12 border-t text-center font-mono text-xs space-y-1.5" style="border-color: var(--card-border); color: var(--text-sub);">
-      <p style="color: var(--text-main);">SHREYAS B J &bull; AI / ML ENGINEER &bull; B.E. ECE (8.89 CGPA)</p>
+      <p style="color: var(--text-main);">SHREYAS B J &bull; AI / ML ENGINEER &bull; B.E. ECE</p>
       <p class="text-[11px]">BANGALORE &bull; CHIKKAMAGALURU, KARNATAKA, INDIA</p>
     </footer>
 
@@ -2409,25 +2409,25 @@ html_template = '''<!DOCTYPE html>
     const DEFAULT_CERTS = [
       {
         id: 1,
-        title: 'Databricks Certified Machine Learning Associate',
+        title: 'Databricks Certified Machine Learning Engineer Associate',
         issuer: 'DATABRICKS',
-        credId: 'CERT-DB-ML',
+        # credId: 'CERT-DB-ML',
         desc: 'Distributed Apache Spark compute, feature store management, MLflow model governance, and scalable production deployment on Databricks Lakehouse platform. (Oct 2026 – Oct 2028)',
         image: null
       },
       {
         id: 2,
-        title: 'Claude Certified Prompt Engineer',
+        title: 'Claude Certified Developer - Foundations',
         issuer: 'ANTHROPIC CLAUDE',
-        credId: 'CERT-ANTH-01',
+        # credId: 'CERT-ANTH-01',
         desc: 'Multi-turn agentic workflows, chain-of-thought steering, structured XML parsing, and LLM-based application development. (Aug 2026 – Aug 2027)',
         image: null
       },
       {
         id: 3,
-        title: 'Build With Gemini Certified Developer',
+        title: 'Build With Gemini',
         issuer: 'GOOGLE CLOUD',
-        credId: 'CERT-GCP-GEM',
+        # credId: 'CERT-GCP-GEM',
         desc: 'Hands-on experience developing AI-powered solutions using Google Gemini and generative AI capabilities, multimodal vision models, and Vertex AI. (Oct 2026)',
         image: null
       },
@@ -2435,7 +2435,7 @@ html_template = '''<!DOCTYPE html>
         id: 4,
         title: 'Introduction to Generative AI',
         issuer: 'NXT WAVE',
-        credId: 'CERT-NXT-GENAI',
+        # credId: 'CERT-NXT-GENAI',
         desc: 'Fundamentals of Generative AI, building neural network models, deep learning foundations, and AI-generated content architectures. (Sep 2024)',
         image: null
       },
@@ -2443,16 +2443,16 @@ html_template = '''<!DOCTYPE html>
         id: 5,
         title: 'Programming in Java',
         issuer: 'NPTEL',
-        credId: 'CERT-NPTEL-JAVA',
+        # credId: 'CERT-NPTEL-JAVA',
         desc: 'Completed structured course covering core Java programming concepts, object-oriented principles, and algorithmic problem-solving. (Oct 2024)',
         image: null
       },
       {
         id: 6,
-        title: 'Python Programming Specialist',
-        issuer: 'TECHNICAL HUB',
-        credId: 'CERT-TH-PYTHON',
-        desc: 'Advanced Python problem-solving, debugging complex logic, data structures, and algorithmic optimizations. (Dec 2023 – Feb 2024)',
+        title: 'Skill Enhancement Course',
+        issuer: 'VTU Belgum',
+        # credId: 'CERT-TH-PYTHON',
+        desc: 'Learn to build intelligent, dynamic, and responsive web applications by integrating AI-powered features into React development. (Dec 2024 – May 2025)',
         image: null
       }
     ];
@@ -4172,7 +4172,7 @@ html_template = '''<!DOCTYPE html>
       // 2. Client-side mailto trigger fallback
       const mailSubject = encodeURIComponent('Portfolio Transmission from ' + name);
       const mailBody = encodeURIComponent('From: ' + name + ' (' + email + ') | Time: ' + timestamp + ' | Message: ' + msg);
-      const mailtoUrl = 'mailto:shreyasbj03@gmail.com?subject=' + mailSubject + '&body=' + mailBody;
+      const mailtoUrl = 'mailto:shreyasbjckm@gmail.com?subject=' + mailSubject + '&body=' + mailBody;
       
       // 3. User feedback: Only show notification hub if authorized!
       if (isAuthorized()) {
@@ -5003,9 +5003,9 @@ html_template = '''<!DOCTYPE html>
 
     const DEFAULT_ABOUT_DATA = {
       title: "The Architect",
-      p1: "I am an AI & Machine Learning Engineer operating at the intersection of deep neural networks, industrial automation, and failure analysis engineering. At Kaynes Technology India Limited, I spearhead failure analysis on cutting-edge printed circuit boards (PCBs) and surface-mount technology (SMT) assemblies, isolating manufacturing micro-defects with computer vision and deterministic testing methodologies.",
+      p1: "I am an AI & Machine Learning Engineer operating at the intersection of deep neural networks, industrial automation, and failure analysis engineering. At Kaynes Technology India Limited, I spearhead failure analysis on production quality and quantity failure, AI precision, dispensing technologies, isolating manufacturing micro-defects with computer vision and deterministic testing methodologies.",
       p2: "My technical foundation spans designing bespoke vision-language models, edge computing inference pipelines, and autonomous RAG agents built for mission-critical enterprise workflows. I believe software excellence is achieved when mathematical elegance directly powers physical hardware reliability.",
-      p3: "Beyond the terminal, I channel observational discipline into fine-art graphite and charcoal portraiture—an artistic practice that sharpens my spatial intuition, geometric precision, and human-centric design thinking."
+      p3: "Beyond the terminal, I channel observational discipline into fine-art graphite and charcoal portraiture-an artistic practice that sharpens my spatial intuition, geometric precision, and human-centric design thinking."
     };
 
     function getAboutData() {
@@ -5241,19 +5241,19 @@ html_template = '''<!DOCTYPE html>
         id: "edu_ncet",
         degree: "BACHELOR OF ENGINEERING (B.E.)",
         institution: "Nagarjuna College of Engineering &amp; Technology (NCET), Bangalore",
-        affiliation: "Affiliated to Visvesvaraya Technological University (VTU) &bull; Electronics &amp; Communication",
-        score: "CGPA: 8.44 / 10.0",
+        affiliation: "Affiliated to Visvesvaraya Technological University (VTU) &bull; Electronics &amp; Communication Engineering",
+        score: "CGPA: 8.89 / 10.0",
         period: "2021 &bull; 2025",
         summary: "Graduated with honors in Electronics and Communication Engineering. Focused deeply on embedded microcontrollers, digital signal processing, computer vision algorithms, and edge AI hardware acceleration. Completed capstone engineering work in automated optical inspection."
       },
       {
         id: "edu_jnv",
         degree: "SENIOR SECONDARY (CLASS XII)",
-        institution: "Jawahar Navodaya Vidyalaya (JNV)",
-        affiliation: "Central Board of Secondary Education (CBSE) &bull; PCMB Stream",
-        score: "Score: 84.6%",
+        institution: "MES SSM PU College",
+        affiliation: "Karnataka State Board &bull; PCMB Stream",
+        score: "Score: 90.05%",
         period: "2019 &bull; 2021",
-        summary: "Graduated with distinction from the prestigious Navodaya residential academy. Developed strong foundations in advanced calculus, physics mechanics, and algorithmic thinking."
+        summary: "Graduated with distinction from the prestigious Malnad Educational Society. Developed strong foundations in advanced calculus, physics mechanics, and algorithmic thinking."
       }
     ];
 
@@ -5300,7 +5300,7 @@ html_template = '''<!DOCTYPE html>
             </div>
           </div>
           <div class="space-y-1.5 font-sans">
-            <span class="text-xs font-mono block font-bold" style="color: var(--text-sub);">Relevant Coursework:</span>
+            # <span class="text-xs font-mono block font-bold" style="color: var(--text-sub);">Relevant Coursework:</span>
             <div class="flex flex-wrap gap-2 text-xs font-mono">
               ${(edu.coursework || []).map(c => `<span class="px-2.5 py-1 rounded border text-cyan-400" style="background-color: var(--card-bg-alt); border-color: var(--card-border);">${c}</span>`).join('')}
             </div>
