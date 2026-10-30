@@ -26,7 +26,7 @@ st.markdown("""
     .stApp {
         margin: 0 !important;
         padding: 0 !important;
-        background-color: #07090E !important;
+        background-color: #060709 !important;
     }
     .main {
         padding: 0 !important;
@@ -35,18 +35,28 @@ st.markdown("""
     .block-container {
         padding: 0 !important;
         margin: 0 !important;
-        max-width: 100% !important;
-        width: 100% !important;
+        max-width: 100vw !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        overflow: hidden !important;
     }
     div[data-testid="stCustomComponentV1"] {
         width: 100% !important;
+        height: 100vh !important;
         margin: 0 !important;
         padding: 0 !important;
     }
-    div[data-testid="stCustomComponentV1"] iframe {
-        width: 100% !important;
+    div[data-testid="stCustomComponentV1"] iframe,
+    iframe {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
         height: 100vh !important;
         border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        z-index: 99999 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -71,4 +81,4 @@ if os.path.exists(photo_path):
         html_content = html_content.replace("./assets/shreyas-photo.png", photo_data_url)
 
 # Render the self-contained cinematic portfolio with scrolling enabled
-components.html(html_content, height=1000, scrolling=True)
+components.html(html_content, height=1200, scrolling=True)

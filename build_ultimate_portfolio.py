@@ -1482,6 +1482,7 @@ html_template = '''<!DOCTYPE html>
           </button>
         </div>
       </div>
+    </div>
   </div>
 
   <div id="editHeroModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
